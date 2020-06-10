@@ -1,27 +1,46 @@
 <!--  -->
 <template>
-  <div class='login-container'>登陆页面</div>
+  <div class='login-container'>
+    <!-- 导航栏 -->
+    <van-nav-bar title="登录" />
+    <!-- 登录表单 -->
+    <van-form @submit="onSubmit">
+      <van-field
+        name="用户名"
+        placeholder="请输入手机号"
+      />
+      <van-field
+        type="password"
+        name="密码"
+        placeholder="请输入验证码"
+      />
+      <div style="margin: 16px;">
+        <van-button block type="info" native-type="submit">
+          登录
+        </van-button>
+      </div>
+    </van-form>
+  </div>
 </template>
 
 <script>
-// 这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
-// 例如：import 《组件名称》 from '《组件路径》';
-
 export default {
   name: '',
-  // import引入的组件需要注入到对象中才能使用
   components: {},
   props: {},
   data () {
-    // 这里存放数据
-    return {}
+    return {
+      username: '',
+      password: ''
+    }
   },
-  // 监听属性 类似于data概念
   computed: {},
-  // 监控data中的数据变化
   watch: {},
-  // 方法集合
-  methods: {},
+  methods: {
+    onSubmit (values) {
+      console.log('submit', values)
+    }
+  },
   // 生命周期 - 创建完成（可以访问当前this实例）
   created () {},
   // 生命周期 - 挂载完成（可以访问DOM元素）
