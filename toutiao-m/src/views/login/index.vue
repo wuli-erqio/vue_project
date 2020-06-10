@@ -2,20 +2,29 @@
 <template>
   <div class='login-container'>
     <!-- 导航栏 -->
-    <van-nav-bar title="登录" />
+    <van-nav-bar class="page-nav-bar" title="登录" />
     <!-- 登录表单 -->
     <van-form @submit="onSubmit">
       <van-field
+        left-icon="smile-o"
         name="用户名"
         placeholder="请输入手机号"
-      />
+      >
+        <i slot="left-icon" class="toutiao toutiao-shouji"></i>
+      </van-field>
       <van-field
+        left-icon="smile-o"
         type="password"
-        name="密码"
+        name="验证码"
         placeholder="请输入验证码"
-      />
-      <div style="margin: 16px;">
-        <van-button block type="info" native-type="submit">
+      >
+        <i slot="left-icon" class="toutiao toutiao-yanzhengma"></i>
+        <template #button class="send-sms-btn">
+          <van-button round size="small" type="default">发送验证码</van-button>
+        </template>
+      </van-field>
+      <div class="login-btn-wrap">
+        <van-button class="login-btn" block type="info" native-type="submit">
           登录
         </van-button>
       </div>
@@ -41,19 +50,39 @@ export default {
       console.log('submit', values)
     }
   },
-  // 生命周期 - 创建完成（可以访问当前this实例）
   created () {},
-  // 生命周期 - 挂载完成（可以访问DOM元素）
   mounted () {},
-  beforeCreate () {}, // 生命周期 - 创建之前
-  beforeMount () {}, // 生命周期 - 挂载之前
-  beforeUpdate () {}, // 生命周期 - 更新之前
-  updated () {}, // 生命周期 - 更新之后
-  beforeDestroy () {}, // 生命周期 - 销毁之前
-  destroyed () {}, // 生命周期 - 销毁完成
-  activated () {} // 如果页面有keep-alive缓存功能，这个函数会触发
+  beforeCreate () {},
+  beforeMount () {},
+  beforeUpdate () {},
+  updated () {},
+  beforeDestroy () {},
+  destroyed () {},
+  activated () {}
 }
 </script>
-<style lang='less' scoped>
-// @import url(); 引入公共css类
+<style scoped lang="less">
+.login-container {
+  .toutiao {
+    font-size: 37px;
+  }
+
+  .send-sms-btn {
+    width: 152px;
+    height: 46px;
+    line-height: 46px;
+    font-size: 22px;
+  }
+  .van-button--default {
+    background-color: #ededed;
+    color: #666;
+  }
+  .login-btn-wrap {
+    padding: 53px 33px;
+    .login-btn {
+      background-color: #6db4fb;
+      border: none;
+    }
+  }
+}
 </style>
