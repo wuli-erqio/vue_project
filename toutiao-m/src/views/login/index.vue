@@ -4,11 +4,20 @@
     <!-- 导航栏 -->
     <van-nav-bar class="page-nav-bar" title="登录" />
     <!-- 登录表单 -->
+    <!-- 表单验证：
+          1. 给van-field组件配置rules验证规则
+          2. 当表单提交的时候会自动触发表单验证
+              如果验证通过，会触发submit组件
+              如果验证失败，不会触发submit
+    -->
     <van-form @submit="onSubmit">
       <van-field
         v-model="user.mobile"
         name="用户名"
         placeholder="请输入手机号"
+        type="number"
+        maxlength="11"
+        :rules="userFormRules.mobile"
       >
         <i slot="left-icon" class="toutiao toutiao-shouji"></i>
       </van-field>
@@ -16,6 +25,9 @@
         v-model="user.code"
         name="验证码"
         placeholder="请输入验证码"
+        type="number"
+        maxlength="6"
+        :rules="userFormRules.code"
       >
         <i slot="left-icon" class="toutiao toutiao-yanzhengma"></i>
         <template #button class="send-sms-btn">
@@ -42,6 +54,22 @@ export default {
       user: {
         mobile: '13911111111',
         code: '246810'
+      },
+      userFormRules: {
+        mobile: [{
+          required: true,
+          message: '手机号不能为空'
+        }, {
+          pattern: /^1[3|5|7|8|9]\d{9}$/,
+          message: '手机号格式错误'
+        }],
+        code: [{
+          required: true,
+          message: '验证码不能为空'
+        }, {
+          pattern: /^\d{6}$/,
+          message: '验证码格式错误'
+        }]
       }
     }
   },
