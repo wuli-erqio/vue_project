@@ -10,10 +10,10 @@
               如果验证通过，会触发submit组件
               如果验证失败，不会触发submit
     -->
-    <van-form @submit="onSubmit">
+    <van-form ref="loginForm" @submit="onSubmit">
       <van-field
         v-model="user.mobile"
-        name="用户名"
+        name="mobile"
         placeholder="请输入手机号"
         type="number"
         maxlength="11"
@@ -23,7 +23,7 @@
       </van-field>
       <van-field
         v-model="user.code"
-        name="验证码"
+        name="code"
         placeholder="请输入验证码"
         type="number"
         maxlength="6"
@@ -31,7 +31,13 @@
       >
         <i slot="left-icon" class="toutiao toutiao-yanzhengma"></i>
         <template #button class="send-sms-btn">
-          <van-button round size="small" type="default">发送验证码</van-button>
+          <van-button
+            round
+            size="small"
+            type="default"
+            native-type="button"
+            @click="onSendSms"
+            >发送验证码</van-button>
         </template>
       </van-field>
       <div class="login-btn-wrap">
@@ -52,8 +58,9 @@ export default {
   data () {
     return {
       user: {
-        mobile: '13911111111',
-        code: '246810'
+        // 13911111111,246810
+        mobile: '',
+        code: ''
       },
       userFormRules: {
         mobile: [{
@@ -99,6 +106,16 @@ export default {
         }
       }
       // 4.根据请求处理返回数据
+    },
+    async onSendSms () {
+      // 1.校验手机号
+      try {
+        await this.$refs.loginForm.validate('mobile')
+      } catch (err) {
+        return console.log(err)
+      }
+      // 2.验证通过，显示倒计时
+      // 3.请求发送验证码
     }
   },
   created () {},
