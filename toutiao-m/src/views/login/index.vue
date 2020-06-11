@@ -33,7 +33,7 @@
         <template #button class="send-sms-btn">
           <van-count-down
             v-if="isCountDownShow"
-            :time="1000 * 10"
+            :time="1000 * 60"
             format="ss s"
             @finish="isCountDownShow = false"/>
           <van-button
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { login } from '@/api/user'
+import { login, sendSms } from '@/api/user'
 export default {
   name: '',
   components: {},
@@ -124,6 +124,18 @@ export default {
       // 2.验证通过，显示倒计时
       this.isCountDownShow = true
       // 3.请求发送验证码
+      try {
+        await sendSms(this.user.mobile)
+        this.$toast('发送成功')
+      } catch (err) {
+        // 发送失败，停止倒计时
+        this.isCountDownShow = false
+        if (err.response.status === 429) {
+          this.$toast('发送太频繁了，请稍后重试')
+        } else {
+          this.$toast('发送失败，请稍后重试')
+        }
+      }
     }
   },
   created () {},
