@@ -7,26 +7,26 @@
           class="avatar"
           round
           fit="cover"
-          src="https://img.yzcdn.cn/vant/cat.jpeg"
+          :src="userInfo.photo"
         />
-        <span class="user-center">力创头条号</span>
+        <span class="user-center">{{ userInfo.name }}</span>
         <van-button size="mini" round>编辑资料</van-button>
       </div>
       <div class="data-stats">
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.art_count }}</span>
           <span class="text">头条</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.follow_count }}</span>
           <span class="text">关注</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.fans_count }}</span>
           <span class="text">粉丝</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.like_count }}</span>
           <span class="text">获赞</span>
         </div>
       </div>
@@ -62,18 +62,22 @@
 
 <script>
 import { mapState } from 'vuex'
+import { getUserInfo } from '@/api/user'
 export default {
   name: 'ProfileIndex',
   components: {},
   props: {},
   data () {
-    return {}
+    return {
+      userInfo: {}
+    }
   },
   computed: {
     ...mapState(['user'])
   },
   watch: {},
   methods: {
+    // 退出事件
     onLogout () {
       // 退出提示
       // 在组件中要使用 this.$dialog 来调用弹框组件
@@ -85,17 +89,24 @@ export default {
           this.$store.commit('setUser', null)
         })
         .catch(() => {})
+    },
+    // 获取用户信息
+    async loadUserInfo () {
+      try {
+        const { data } = await getUserInfo()
+        this.userInfo = data.data
+      } catch (err) {
+        this.$toast('获取数据失败，请稍后再试')
+      }
     }
   },
-  created () {},
-  mounted () {},
-  beforeCreate () {},
-  beforeMount () {},
-  beforeUpdate () {},
-  updated () {},
-  beforeDestroy () {},
-  destroyed () {},
-  activated () {}
+  created () {
+    // 如果用户登录了，就加载数据
+    if (this.user) {
+      this.loadUserInfo()
+    }
+  },
+  mounted () {}
 }
 </script>
 <style lang='less' scoped>
