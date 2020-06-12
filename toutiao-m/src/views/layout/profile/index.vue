@@ -7,6 +7,37 @@
         <span class="text">登录 / 注册</span>
       </div>
     </div>
+
+    <div class="header user-info">
+      <div class="base-info">
+        <van-image
+          class="avatar"
+          round
+          fit="cover"
+          src="https://img.yzcdn.cn/vant/cat.jpeg"
+        />
+        <span class="user-center">力创头条号</span>
+        <van-button size="mini" round>编辑资料</van-button>
+      </div>
+      <div class="data-stats">
+        <div class="data-item">
+          <span class="count">10</span>
+          <span class="text">头条</span>
+        </div>
+        <div class="data-item">
+          <span class="count">10</span>
+          <span class="text">关注</span>
+        </div>
+        <div class="data-item">
+          <span class="count">10</span>
+          <span class="text">粉丝</span>
+        </div>
+        <div class="data-item">
+          <span class="count">10</span>
+          <span class="text">获赞</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -56,6 +87,45 @@ export default {
       .text {
         font-size: 28px;
         color: #fff;
+      }
+    }
+  }
+  .user-info {
+    .base-info {
+      height: 231px;
+      padding: 76px 32px 23px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      .user-center {
+        flex: 1;
+        font-size: 30px;
+        color: #fff;
+      }
+      .avatar {
+        width: 132px;
+        height: 132px;
+        border: 4px solid #fff;
+        margin-right: 23px;
+      }
+    }
+    .data-stats {
+      display: flex;
+      align-items: center;
+      .data-item {
+        flex: 1;
+        height: 130px;
+        display: flex;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .count {
+          font-size: 36px;
+        }
+        .text {
+          font-size: 23px;
+        }
       }
     }
   }
