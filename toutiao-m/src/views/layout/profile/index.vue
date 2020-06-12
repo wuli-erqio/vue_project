@@ -56,7 +56,7 @@
     <!-- /导航 -->
     <van-cell title="消息通知" is-link />
     <van-cell class="mb-9" title="小智同学" is-link />
-    <van-cell v-if="user" class="logout-cell" title="退出登录" />
+    <van-cell v-if="user" clickable @click="onLogout" class="logout-cell" title="退出登录" />
   </div>
 </template>
 
@@ -73,7 +73,20 @@ export default {
     ...mapState(['user'])
   },
   watch: {},
-  methods: {},
+  methods: {
+    onLogout () {
+      // 退出提示
+      // 在组件中要使用 this.$dialog 来调用弹框组件
+      this.$dialog.confirm({
+        title: '确认退出吗？'
+      })
+        .then(() => {
+          // 确认退出： 清除登陆状态（容器中的user + 本地存储中的状态）
+          this.$store.commit('setUser', null)
+        })
+        .catch(() => {})
+    }
+  },
   created () {},
   mounted () {},
   beforeCreate () {},
