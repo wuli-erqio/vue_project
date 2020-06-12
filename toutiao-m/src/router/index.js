@@ -8,6 +8,33 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/login')
+  },
+  {
+    path: '/',
+    name: 'layout',
+    component: () => import('@/views/layout'),
+    children: [
+      {
+        path: '', // 默认子路由, 只能有一个
+        name: 'home',
+        component: () => import('@/views/layout/home')
+      },
+      {
+        path: '/qa',
+        name: 'qa',
+        component: () => import('@/views/layout/qa')
+      },
+      {
+        path: '/video',
+        name: 'video',
+        component: () => import('@/views/layout/video')
+      },
+      {
+        path: '/profile',
+        name: 'profile',
+        component: () => import('@/views/layout/profile')
+      }
+    ]
   }
 ]
 
