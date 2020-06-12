@@ -25,7 +25,7 @@
       </van-tabbar-item>
       <van-tabbar-item to='/profile'>
         <i slot="icon" class="toutiao toutiao-wode"></i>
-        <span class="text">我的</span>
+        <span class="text">{{ $store.state.user ? '我的' : '未登录' }}</span>
       </van-tabbar-item>
     </van-tabbar>
     <!-- /标签导航栏 -->

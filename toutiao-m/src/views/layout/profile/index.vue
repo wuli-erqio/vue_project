@@ -1,13 +1,7 @@
 <template>
   <div class='profile-container'>
-    <div class="header not-login">
-      <div class="login-btn" @click="$router.push('/login')">
-        <img class="mobile-img" src="~@/assets/mobile.png" alt="">
-        <span class="text">登录 / 注册</span>
-      </div>
-    </div>
-
-    <div class="header user-info">
+    <!-- 头部已登录 -->
+    <div v-if="user" class="header user-info">
       <div class="base-info">
         <van-image
           class="avatar"
@@ -37,6 +31,17 @@
         </div>
       </div>
     </div>
+    <!-- /头部已登录 -->
+
+    <!-- 头部未登录 -->
+    <div v-else class="header not-login">
+      <div class="login-btn" @click="$router.push('/login')">
+        <img class="mobile-img" src="~@/assets/mobile.png" alt="">
+        <span class="text">登录 / 注册</span>
+      </div>
+    </div>
+    <!-- /头部未登录 -->
+
     <!-- 导航 -->
     <van-grid class="grid-nav" :column-num="2" clickable>
       <van-grid-item class="grid-item">
@@ -49,18 +54,24 @@
       </van-grid-item>
     </van-grid>
     <!-- /导航 -->
+    <van-cell title="消息通知" is-link />
+    <van-cell class="mb-9" title="小智同学" is-link />
+    <van-cell v-if="user" class="logout-cell" title="退出登录" />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: '',
+  name: 'ProfileIndex',
   components: {},
   props: {},
   data () {
     return {}
   },
-  computed: {},
+  computed: {
+    ...mapState(['user'])
+  },
   watch: {},
   methods: {},
   created () {},
@@ -141,6 +152,7 @@ export default {
     }
   }
   .grid-nav {
+    margin-bottom: 9px;
     .grid-item {
       height: 141px;
       i.toutiao {
@@ -156,6 +168,13 @@ export default {
         font-size: 28px;
       }
     }
+  }
+  .mb-9 {
+    margin-bottom: 9px;
+  }
+  .logout-cell {
+    text-align: center;
+    color: #d86262;
   }
 }
 </style>
