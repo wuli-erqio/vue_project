@@ -65,8 +65,8 @@ export default {
     return {
       user: {
         // 13911111111,246810
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       userFormRules: {
         mobile: [{
@@ -102,8 +102,8 @@ export default {
       })
       // 3.提交表单登录请求
       try {
-        const res = await login(user)
-        console.log(res)
+        const { data } = await login(user)
+        this.$store.commit('setUser', data.data)
         this.$toast.success('登录成功')
       } catch (err) {
         if (err.response.status === 400) {
