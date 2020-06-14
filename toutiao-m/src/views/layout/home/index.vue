@@ -22,7 +22,12 @@
       <van-tab title="标签 5">内容 5</van-tab>
       <van-tab title="标签 5">内容 5</van-tab>
       <van-tab title="标签 5">内容 5</van-tab>
+      <div slot="nav-right" class="placeholder"></div>
+      <div slot="nav-right" class="hamburger-btn">
+        <i class="toutiao toutiao-gengduo"></i>
+      </div>
     </van-tabs>
+    <!-- /频道列表 -->
   </div>
 </template>
 
@@ -78,6 +83,34 @@ export default {
       width: 31px !important;
       height: 6px;
       background-color: #3296fa;
+    }
+    .hamburger-btn {
+      position: fixed;
+      right: 0;
+      width: 66px;
+      height: 82px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      opacity: 0.902;
+      i.toutiao {
+        font-size: 33px;
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 1px;
+        height: 100%;
+        background-image: url(~@/assets/gradient-gray-line.png);
+        background-size: contain;
+      }
+    }
+    .placeholder {
+      width: 66px;
+      height: 82px;
+      flex-shrink: 0;
     }
   }
 }
