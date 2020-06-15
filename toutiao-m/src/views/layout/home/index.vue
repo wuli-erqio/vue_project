@@ -15,13 +15,10 @@
     <!-- 频道列表 -->
     <!-- 通过v-model绑定当前激活标签对应的索引值，默认情况下启用第一个标签 -->
     <van-tabs class="channel-tabs" v-model="active" animated swipeable>
-      <van-tab title="标签 1">内容 1</van-tab>
-      <van-tab title="标签 2">内容 2</van-tab>
-      <van-tab title="标签 3">内容 3</van-tab>
-      <van-tab title="标签 4">内容 4</van-tab>
-      <van-tab title="标签 5">内容 5</van-tab>
-      <van-tab title="标签 5">内容 5</van-tab>
-      <van-tab title="标签 5">内容 5</van-tab>
+      <van-tab
+        v-for="channel in channels"
+        :key="channel.id"
+        :title="channel.name">{{channel.name}}</van-tab>
       <div slot="nav-right" class="placeholder"></div>
       <div slot="nav-right" class="hamburger-btn">
         <i class="toutiao toutiao-gengduo"></i>
@@ -32,19 +29,32 @@
 </template>
 
 <script>
+import { getUserChannels } from '@/api/user'
 export default {
   name: 'HomeIndex',
   components: {},
   props: {},
   data () {
     return {
-      active: 0
+      active: 0,
+      channels: [] // 频道列表
     }
   },
   computed: {},
   watch: {},
-  methods: {},
-  created () {}
+  methods: {
+    async loadChannels () {
+      try {
+        const { data } = await getUserChannels()
+        this.channels = data.data.channels
+      } catch (err) {
+        this.$toast('获取频道列表数据失败')
+      }
+    }
+  },
+  created () {
+    this.loadChannels()
+  }
 }
 </script>
 <style lang='less' scoped>
