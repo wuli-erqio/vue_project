@@ -6,6 +6,8 @@
       :finished="finished"
       finished-text="没有更多了"
       @load="onLoad"
+      :error.sync="error"
+      error-text="请求失败，点击重新加载"
     >
       <van-cell v-for="(article, index) in list" :key="index" :title="article.title" />
     </van-list>
@@ -28,7 +30,8 @@ export default {
       list: [], // 存储列表数据的数组
       loading: false, // 控制加载中loading状态
       finished: false, // 控制数据加载结束状态
-      timestamp: null
+      timestamp: null,
+      error: false
     }
   },
   computed: {},
@@ -46,7 +49,6 @@ export default {
           // 是否包含置顶，进入页面第一次请求时要包含置顶文章，1-包含置顶，0-不包含
           with_top: 1
         })
-
         // 2.把请求结果数据添加到list数组中
         const { results } = data.data
         // 数组的展开操作符，他会把数组元素一个一个拿出来
@@ -54,6 +56,12 @@ export default {
         // 3.本次数据加载结束之后要把加载状态设置为结束
         // loading 关闭以后才能触发下一次的加载更多
         this.loading = false
+
+        // 模拟随机失败的情况
+        // if (Math.random() > 0.5) {
+        //   JSON.parse('jcbwuuvivi')
+        // }
+
         // 4.判断数据是否全部加载完成
         if (results.length) {
           // 更新获取下一页数据的时间戳
@@ -62,7 +70,11 @@ export default {
           // 没有数据了，finished 设置为true, 之后不在触发加载更多
           this.finished = true
         }
-      } catch (err) {}
+      } catch (err) {
+        this.error = true
+        // 请求失败，loading也要关闭
+        this.loading = false
+      }
     }
   },
   created () {}
