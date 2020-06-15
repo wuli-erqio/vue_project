@@ -66,6 +66,7 @@ export default {
 </script>
 <style lang='less' scoped>
 .home-container {
+  padding-bottom: 100px;
   /deep/.van-nav-bar__title {
     max-width: unset;
   }
