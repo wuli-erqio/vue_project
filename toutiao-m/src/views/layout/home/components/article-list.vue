@@ -1,16 +1,18 @@
 <!-- 文章列表组件 -->
 <template>
   <div class='article-list'>
-    <van-list
-      v-model="loading"
-      :finished="finished"
-      finished-text="没有更多了"
-      @load="onLoad"
-      :error.sync="error"
-      error-text="请求失败，点击重新加载"
-    >
-      <van-cell v-for="(article, index) in list" :key="index" :title="article.title" />
-    </van-list>
+    <van-pull-refresh v-model="isreFreshLoading" :success-duration="1500" :success-text="reFreshSuccessText" @refresh="onRefresh">
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+        :error.sync="error"
+        error-text="请求失败，点击重新加载"
+      >
+        <van-cell v-for="(article, index) in list" :key="index" :title="article.title" />
+      </van-list>
+    </van-pull-refresh>
   </div>
 </template>
 
@@ -31,7 +33,9 @@ export default {
       loading: false, // 控制加载中loading状态
       finished: false, // 控制数据加载结束状态
       timestamp: null,
-      error: false
+      error: false,
+      isreFreshLoading: false, // 控制下拉刷新的状态
+      reFreshSuccessText: '刷新成功' // 下拉刷新成功提示文本
     }
   },
   computed: {},
@@ -74,6 +78,27 @@ export default {
         this.error = true
         // 请求失败，loading也要关闭
         this.loading = false
+      }
+    },
+    // 当下拉刷新触发该方法
+    async onRefresh () {
+      // 1.请求获取数据
+      try {
+        const { data } = await getArticles({
+          channel_id: this.channel.id,
+          timestamp: Date.now(),
+          with_top: 1
+        })
+        // 2.将数据追加到列表的顶部
+        const { results } = data.data
+        this.list.unshift(...results)
+        // 3.关闭下拉刷新的 loading 状态
+        this.isreFreshLoading = false
+        // 更新下拉刷新成功展示的文本
+        this.reFreshSuccessText = `刷新成功，更新了${results.length}条数据`
+      } catch (err) {
+        this.reFreshSuccessText = '刷新失败'
+        this.isreFreshLoading = false
       }
     }
   },
