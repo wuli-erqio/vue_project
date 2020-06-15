@@ -12,7 +12,8 @@
       >
         <article-item
           v-for="(article, index) in list"
-          :key="index"></article-item>
+          :key="index"
+          :article="article"></article-item>
       </van-list>
     </van-pull-refresh>
   </div>
