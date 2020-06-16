@@ -11,18 +11,23 @@
         background="#3296fa"
         @search="onSearch"
         @cancel="onCancel"
+        @focus="isReaultShow = false"
       />
     </form>
     <!-- /顶部搜索栏 -->
-    <!-- 搜索历史记录 -->
-    <search-history />
-    <!-- /搜索历史记录 -->
+
+    <!-- 搜索结果 -->
+    <search-result v-if="isReaultShow"/>
+    <!-- /搜索结果 -->
+
     <!-- 联想建议 -->
-    <search-suggest />
+    <search-suggest v-else-if="searchText"/>
     <!-- /联想建议 -->
-    <!-- 历史记录 -->
-    <search-result />
-    <!-- /历史记录 -->
+
+    <!-- 搜索历史记录 -->
+    <search-history v-else />
+    <!-- /搜索历史记录 -->
+
   </div>
 </template>
 
@@ -40,14 +45,15 @@ export default {
   props: {},
   data () {
     return {
-      searchText: ''
+      searchText: '',
+      isReaultShow: false // 控制搜索结果的展示
     }
   },
   computed: {},
   watch: {},
   methods: {
     onSearch (val) {
-      this.$toast(val)
+      this.isReaultShow = true
     },
     onCancel () {
       this.$router.back()
