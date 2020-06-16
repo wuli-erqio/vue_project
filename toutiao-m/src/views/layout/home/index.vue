@@ -71,7 +71,7 @@ export default {
         this.$toast('获取频道列表数据失败')
       }
     },
-    onUpdataActive (index) {
+    onUpdataActive (index, isChannelEditShow = true) {
       this.active = index
       this.isChannelEditShow = false
     }
