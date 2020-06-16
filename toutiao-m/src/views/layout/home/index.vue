@@ -9,7 +9,8 @@
         size="small"
         icon="search"
         class="search-btn"
-        round>搜索</van-button>
+        round
+        to="/search">搜索</van-button>
     </van-nav-bar>
     <!-- /导航栏 -->
     <!-- 频道列表 -->
