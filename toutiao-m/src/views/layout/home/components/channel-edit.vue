@@ -10,7 +10,7 @@
         class="grid-item"
         v-for="(channel, index) in myChannels"
         :key="index"
-        @click="onMyChannelClck(channel, index)">
+        @click="onMyChannelClick(channel, index)">
         <!-- v-bind:class语法
             一个对象，对象中的key表示要作用的css类名
                     对象中的value要计算出布尔值
@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import { getAllChannels, deleteUserChannel } from '@/api/channel'
+import { getAllChannels, deleteUserChannel, addUserChannel } from '@/api/channel'
 import { setItem } from '@/utils/storage'
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'ChannelEdit',
   components: {},
@@ -73,21 +73,7 @@ export default {
   // 计算属性会观测内部依赖数据的变化
   // 如果依赖的数据发生变化，则计算苏醒会重新执行
   computed: {
-    // recommandChannels () {
-    //   const channels = []
-    //   this.allChannels.forEach(channel => {
-    //     // find 遍历数组，找到满足条件的元素
-    //     const ret = this.myChannels.find(myChannel => {
-    //       return myChannel.id === channel.id
-    //     })
-    //     // 如果我的评到中不包括该频道项
-    //     if (!ret) {
-    //       channels.push(channel)
-    //     }
-    //   })
-    //   // 把计算结果返回
-    //   return channels
-    // }
+    ...mapState(['user']),
     recommandChannels () {
       // 数组是filter方法，遍历数组，把符合条件的元素存储到新数组
       return this.allChannels.filter(channel => {
@@ -106,10 +92,25 @@ export default {
         this.$toast('数据获取失败')
       }
     },
-    onAddChannel (channel) {
+    async onAddChannel (channel) {
       this.myChannels.push(channel)
+      try {
+        // 数据持久化处理
+        if (this.user) {
+          // 已登录，把数据请求接口放到线上
+          await addUserChannel({
+            id: channel.id, // 频道ID
+            seq: this.myChannels.length // 序号
+          })
+        } else {
+          // 未登录，把数据存储在本地
+          setItem('TOUTIAO_CHANNELS', this.myChannels)
+        }
+      } catch (error) {
+        this.$toast('添加失败，请稍后重试')
+      }
     },
-    onMyChannelClck (channel, index) {
+    onMyChannelClick (channel, index) {
       if (this.isEdit) {
         // 1.如果是固定频道，不要删除
         if (this.fiexdChannels.includes(channel.id)) {
