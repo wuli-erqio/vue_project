@@ -24,11 +24,18 @@
         <!-- /文章列表 -->
       </van-tab>
       <div slot="nav-right" class="placeholder"></div>
-      <div slot="nav-right" class="hamburger-btn">
+      <div slot="nav-right" class="hamburger-btn" @click="isChannelEditShow=true">
         <i class="toutiao toutiao-gengduo"></i>
       </div>
     </van-tabs>
     <!-- /频道列表 -->
+    <!-- 频道编辑弹出层 -->
+    <van-popup
+      v-model="isChannelEditShow"
+      closeable
+      position="bottom"
+      :style="{ height: '100%' }"
+      close-icon-position="top-left"></van-popup>
   </div>
 </template>
 
@@ -44,7 +51,8 @@ export default {
   data () {
     return {
       active: 0,
-      channels: [] // 频道列表
+      channels: [], // 频道列表
+      isChannelEditShow: false // 控制编辑频道弹出层的显示与隐藏
     }
   },
   computed: {},
