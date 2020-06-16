@@ -34,7 +34,8 @@
         v-for="(channel, index) in recommandChannels"
         :key="index"
         icon="plus"
-        :text="channel.name" />
+        :text="channel.name"
+        @click="onAddChannel(channel)" />
     </van-grid>
     <!-- /频道推荐 -->
   </div>
@@ -60,6 +61,8 @@ export default {
       allChannels: []
     }
   },
+  // 计算属性会观测内部依赖数据的变化
+  // 如果依赖的数据发生变化，则计算苏醒会重新执行
   computed: {
     // recommandChannels () {
     //   const channels = []
@@ -93,6 +96,9 @@ export default {
       } catch (err) {
         this.$toast('数据获取失败')
       }
+    },
+    onAddChannel (channel) {
+      this.myChannels.push(channel)
     }
   },
   created () {
