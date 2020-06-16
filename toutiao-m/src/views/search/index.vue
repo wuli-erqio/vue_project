@@ -17,13 +17,17 @@
     <!-- /顶部搜索栏 -->
 
     <!-- 搜索结果 -->
-    <search-result v-if="isReaultShow"/>
+    <search-result
+      v-if="isReaultShow"
+      :search-text="searchText"
+    />
     <!-- /搜索结果 -->
 
     <!-- 联想建议 -->
     <search-suggest
       v-else-if="searchText"
-      :search-text="searchText"/>
+      :search-text="searchText"
+      @search="onSearch"/>
     <!-- /联想建议 -->
 
     <!-- 搜索历史记录 -->
@@ -55,6 +59,7 @@ export default {
   watch: {},
   methods: {
     onSearch (val) {
+      this.searchText = val
       this.isReaultShow = true
     },
     onCancel () {
