@@ -4,8 +4,9 @@
     <van-cell
       v-for="(text, index) in suggestions"
       :key="index"
-      :title="text"
-      icon="search"></van-cell>
+      icon="search">
+      <div v-html="text" slot="title"></div>
+    </van-cell>
   </div>
 </template>
 
