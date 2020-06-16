@@ -23,7 +23,7 @@
         <i slot="icon" class="toutiao toutiao-shipin"></i>
         <span class="text">视频</span>
       </van-tabbar-item>
-      <van-tabbar-item to='/profile'>
+      <van-tabbar-item to='/my'>
         <i slot="icon" class="toutiao toutiao-wode"></i>
         <span class="text">{{ $store.state.user ? '我的' : '未登录' }}</span>
       </van-tabbar-item>

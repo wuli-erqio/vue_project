@@ -30,9 +30,9 @@ const routes = [
         component: () => import('@/views/layout/video')
       },
       {
-        path: '/profile',
-        name: 'profile',
-        component: () => import('@/views/layout/profile')
+        path: '/my',
+        name: 'my',
+        component: () => import('@/views/layout/my')
       }
     ]
   },
@@ -40,6 +40,11 @@ const routes = [
     path: '/search',
     name: 'search',
     component: () => import('@/views/search')
+  },
+  {
+    path: '/user/profile',
+    name: 'user-profile',
+    component: () => import('@/views/user-profile')
   }
 ]
 

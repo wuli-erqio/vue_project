@@ -1,5 +1,5 @@
 <template>
-  <div class='profile-container'>
+  <div class='my-container'>
     <!-- 头部已登录 -->
     <div v-if="user" class="header user-info">
       <div class="base-info">
@@ -10,7 +10,11 @@
           :src="userInfo.photo"
         />
         <span class="user-center">{{ userInfo.name }}</span>
-        <van-button size="mini" round>编辑资料</van-button>
+        <van-button
+          size="mini"
+          to="/user/profile"
+          round
+        >编辑资料</van-button>
       </div>
       <div class="data-stats">
         <div class="data-item">
@@ -64,7 +68,7 @@
 import { mapState } from 'vuex'
 import { getUserInfo } from '@/api/user'
 export default {
-  name: 'ProfileIndex',
+  name: 'MyIndex',
   components: {},
   props: {},
   data () {
@@ -110,7 +114,7 @@ export default {
 }
 </script>
 <style lang='less' scoped>
-.profile-container {
+.my-container {
   .header {
     height: 361px;
     background: url("~@/assets/banner.png");
