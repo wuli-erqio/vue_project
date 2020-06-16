@@ -1,4 +1,3 @@
-<!--  -->
 <template>
   <div class='search-container'>
     <!-- 顶部搜索栏 -->
@@ -15,13 +14,29 @@
       />
     </form>
     <!-- /顶部搜索栏 -->
+    <!-- 搜索历史记录 -->
+    <search-history />
+    <!-- /搜索历史记录 -->
+    <!-- 联想建议 -->
+    <search-suggest />
+    <!-- /联想建议 -->
+    <!-- 历史记录 -->
+    <search-result />
+    <!-- /历史记录 -->
   </div>
 </template>
 
 <script>
+import SearchHistory from './components/search-history'
+import SearchResult from './components/search-result'
+import SearchSuggest from './components/search-suggest'
 export default {
   name: 'SearchIndex',
-  components: {},
+  components: {
+    SearchHistory,
+    SearchResult,
+    SearchSuggest
+  },
   props: {},
   data () {
     return {
