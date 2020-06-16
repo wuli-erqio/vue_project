@@ -15,9 +15,18 @@
         round
         :src="user.photo"></van-image>
     </van-cell>
-    <van-cell title="昵称" :value="user.name" is-link></van-cell>
+    <van-cell
+      title="昵称"
+      :value="user.name"
+      is-link
+      @click="isUpdataNameShow = true"></van-cell>
     <van-cell title="性别" :value="user.gender === 0 ? '男': '女'" is-link></van-cell>
     <van-cell title="生日" :value="user.birthday" is-link></van-cell>
+    <!-- 编辑昵称 -->
+    <van-popup
+      v-model="isUpdataNameShow"
+      style="height: 100%"
+      position="bottom">222</van-popup>
   </div>
 </template>
 
@@ -29,7 +38,8 @@ export default {
   props: {},
   data () {
     return {
-      user: {}
+      user: {},
+      isUpdataNameShow: false
     }
   },
   computed: {},
