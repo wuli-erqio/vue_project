@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { getAllChannels } from '@/api/channel'
 export default {
   name: 'ChannelEdit',
   components: {},
@@ -55,12 +56,25 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      allChannels: []
+    }
   },
   computed: {},
   watch: {},
-  methods: {},
-  created () {}
+  methods: {
+    async loadAllChannels () {
+      try {
+        const { data } = await getAllChannels()
+        this.allChannels = data.data.channels
+      } catch (err) {
+        this.$toast('数据获取失败')
+      }
+    }
+  },
+  created () {
+    this.loadAllChannels()
+  }
 }
 </script>
 <style lang='less' scoped>
