@@ -12,22 +12,29 @@
 export default {
   name: 'SearchSuggest',
   components: {},
-  props: {},
+  props: {
+    searchText: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {}
   },
   computed: {},
-  watch: {},
+  watch: {
+    searchText: {
+      // 当searchText发生改变的时候，就会调用handler函数
+      // 注意：handler函数名称是固定的
+      handler (value) {
+        console.log(value)
+      },
+      // 该回调将会在侦听开始之后被立即调用
+      immediate: true
+    }
+  },
   methods: {},
-  created () {},
-  mounted () {},
-  beforeCreate () {},
-  beforeMount () {},
-  beforeUpdate () {},
-  updated () {},
-  beforeDestroy () {},
-  destroyed () {},
-  activated () {}
+  created () {}
 }
 </script>
 <style lang='less' scoped>
