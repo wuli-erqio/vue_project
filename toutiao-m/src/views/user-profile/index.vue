@@ -26,15 +26,21 @@
     <van-popup
       v-model="isUpdataNameShow"
       style="height: 100%"
-      position="bottom">222</van-popup>
+      position="bottom"
+    >
+      <update-name />
+    </van-popup>
   </div>
 </template>
 
 <script>
 import { getUserProfile } from '@/api/user'
+import UpdateName from './components/update-name'
 export default {
   name: 'UserProfile',
-  components: {},
+  components: {
+    UpdateName
+  },
   props: {},
   data () {
     return {
