@@ -28,7 +28,7 @@
       style="height: 100%"
       position="bottom"
     >
-      <update-name />
+      <update-name @colse="isUpdataNameShow = false" />
     </van-popup>
   </div>
 </template>
@@ -70,6 +70,9 @@ export default {
   .avatar {
     width: 60px;
     height: 60px;
+  }
+  .van-popup {
+    background-color: #f5f7f9;
   }
 }
 </style>
