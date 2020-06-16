@@ -5,7 +5,7 @@
       v-for="(text, index) in suggestions"
       :key="index"
       icon="search">
-      <div v-html="text" slot="title"></div>
+      <div v-html="highlight(text)" slot="title"></div>
     </van-cell>
   </div>
 </template>
@@ -55,10 +55,25 @@ export default {
       } catch (error) {
         this.$toast('数据获取失败，请稍后重试')
       }
+    },
+    highlight (text) {
+      const highlightStr = `<span class="active">${this.searchText}</span>`
+      // 正则表达式 // 中间的内容都会当作匹配字符，而不是数据变量
+      // 如果需要数据变量动态的创建正则表达式，则需要手动创建 new RegExp
+      // RegExp正则表达式构造函数
+      //  参数一： 匹配模式字符串，它会根据这个字符串创建正则表达式
+      //  参数二： 匹配模式，要写到字符串中
+      const reg = new RegExp(this.searchText, 'gi')
+      return text.replace(reg, highlightStr)
     }
   },
   created () {}
 }
 </script>
 <style lang='less' scoped>
+.search-suggest {
+  /deep/ span.active {
+    color: red;
+  }
+}
 </style>
