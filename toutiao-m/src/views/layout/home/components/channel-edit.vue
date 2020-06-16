@@ -3,20 +3,24 @@
   <div class='channel-edit'>
     <van-cell :border="false">
       <div slot="title" class="title-text">我的频道</div>
-      <van-button type="danger" class="edit-btn" round plain size="mini">编辑</van-button>
+      <van-button @click="isEdit=!isEdit" type="danger" class="edit-btn" round plain size="mini">{{ isEdit ? '完成' : '编辑' }}</van-button>
     </van-cell>
     <van-grid class="my-grid" :gutter="10">
       <van-grid-item
         class="grid-item"
         v-for="(channel, index) in myChannels"
-        :key="index"
-        icon="clear">
+        :key="index">
         <!-- v-bind:class语法
             一个对象，对象中的key表示要作用的css类名
                     对象中的value要计算出布尔值
                     true,则作用该类名
                     false，不作用类名
         -->
+        <van-icon
+          v-show="isEdit && !fiexChannels.includes(channel.id)"
+          slot="icon"
+          name="clear"
+          ></van-icon>
         <span
           class="text"
           slot="text"
@@ -58,7 +62,9 @@ export default {
   },
   data () {
     return {
-      allChannels: []
+      allChannels: [],
+      isEdit: false,
+      fiexChannels: [0] // 固定频道，不允许删除
     }
   },
   // 计算属性会观测内部依赖数据的变化
@@ -133,6 +139,9 @@ export default {
       }
       .active {
         color: red;
+      }
+      .van-grid-item__icon-wrapper {
+        position: unset;
       }
     }
   }
