@@ -36,7 +36,7 @@
       position="bottom"
       :style="{ height: '100%' }"
       close-icon-position="top-left">
-      <channel-edit :active="active" :my-channels="channels"/>
+      <channel-edit @updata-active="onUpdataActive" :active="active" :my-channels="channels"/>
     </van-popup>
     <!-- /频道编辑弹出层 -->
   </div>
@@ -70,6 +70,10 @@ export default {
       } catch (err) {
         this.$toast('获取频道列表数据失败')
       }
+    },
+    onUpdataActive (index) {
+      this.active = index
+      this.isChannelEditShow = false
     }
   },
   created () {

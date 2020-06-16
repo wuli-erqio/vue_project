@@ -9,7 +9,8 @@
       <van-grid-item
         class="grid-item"
         v-for="(channel, index) in myChannels"
-        :key="index">
+        :key="index"
+        @click="onMyChannelClck(channel, index)">
         <!-- v-bind:class语法
             一个对象，对象中的key表示要作用的css类名
                     对象中的value要计算出布尔值
@@ -105,6 +106,14 @@ export default {
     },
     onAddChannel (channel) {
       this.myChannels.push(channel)
+    },
+    onMyChannelClck (channel, index) {
+      if (this.isEdit) {
+        // 如果是编辑状态，执行删除频道
+      } else {
+        // 非编辑状态，执行切换频道
+        this.$emit('updata-active', index)
+      }
     }
   },
   created () {
