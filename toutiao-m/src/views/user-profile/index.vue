@@ -7,13 +7,19 @@
       left-arrow
       @click-left="$router.back()"
     />
+    <input
+      type="file"
+      hidden
+      ref="file"
+      @change="onFileChange">
     <!-- 个人信息 -->
     <van-cell title="头像" is-link>
       <van-image
         class="avatar"
         fit="cover"
         round
-        :src="user.photo"></van-image>
+        :src="user.photo"
+        @click="$refs.file.click()"></van-image>
     </van-cell>
     <van-cell
       title="昵称"
@@ -41,8 +47,7 @@
     <!-- 编辑性别 -->
     <van-popup
       v-model="isUpdateGenderShow"
-      position="bottom"
-    >
+      position="bottom">
       <update-gender
         v-if="isUpdateGenderShow"
         @close="isUpdateGenderShow=false"
@@ -51,8 +56,7 @@
     <!-- 编辑生日 -->
     <van-popup
       v-model="isUpdateBirthdayShow"
-      position="bottom"
-    >
+      position="bottom">
       <update-birthday
         v-if="isUpdateBirthdayShow"
         @close="isUpdateBirthdayShow=false"
@@ -92,6 +96,13 @@ export default {
       } catch (error) {
         this.$toast('数据获取失败')
       }
+    },
+    onFileChange () {
+      // 获取文件队形
+      const file = this.$refs.file.files[0]
+      // 基于文章对象获取blob对象
+      const data = window.URL.createObjectURL(file)
+      console.log(data)
     }
   },
   created () {
@@ -99,6 +110,7 @@ export default {
   }
 }
 </script>
+
 <style lang='less' scoped>
 .user-profile {
   .avatar {
