@@ -4,7 +4,7 @@
     <img class="img" :src="img" ref="img"/>
     <div class="toolbar">
       <div class="cancel" @click="$emit('close')">取消</div>
-      <div class="confirm">完成</div>
+      <div class="confirm" @click="onConfirm">完成</div>
     </div>
   </div>
 </template>
@@ -22,15 +22,27 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      cropper: null
+    }
   },
   computed: {},
   watch: {},
-  methods: {},
+  methods: {
+    onConfirm () {
+      // 基于服务端的裁切使用getData() 方法获取参数
+      // console.log(this.cropper.getData())
+      // 纯客户端的裁切使用 getCroppedCanvas() 获取裁切的文件对象
+      this.cropper.getCroppedCanvas().toBlob((blob) => {
+        // const formData = new FormData()
+        console.log(blob)
+      })
+    }
+  },
   created () {},
   mounted () {
     const image = this.$refs.img
-    const cropper = new Cropper(image, {
+    this.cropper = new Cropper(image, {
       // 定义cropper的查看模式。
       // 如果您将viewMode设置为0，那么裁切框可以扩展到画布之外，
       // 而1、2或3的值将限制裁切框的大小到画布的大小。
@@ -44,7 +56,7 @@ export default {
       // 截图比例，默认19/9
       aspectRatio: 1,
       // 自动截取比例
-      autoCropArea: 1,
+      // autoCropArea: 1,
       // 画布移动
       cropBoxMovable: false,
       // 截图区域的缩放
@@ -54,7 +66,6 @@ export default {
       // 画布是否可以移动，默认可以
       movable: true
     })
-    console.log(cropper)
   }
 }
 </script>
