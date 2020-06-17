@@ -28,7 +28,7 @@
       style="height: 100%"
       position="bottom"
     >
-      <update-name v-if="isUpdataNameShow" v-model="user.name" @colse="isUpdataNameShow = false" />
+      <update-name v-if="isUpdataNameShow" v-model="user.name" @close="isUpdataNameShow = false" />
     </van-popup>
   </div>
 </template>

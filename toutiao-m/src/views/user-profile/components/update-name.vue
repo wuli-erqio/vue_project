@@ -6,12 +6,13 @@
       title="设置昵称"
       left-text="取消"
       right-text="完成"
-      @click-left="$emit('colse')"
+      @click-left="$emit('close')"
+      @click-right="onConfirm"
     />
     <!-- 输入框 -->
     <div class="field-wrap">
       <van-field
-        v-model="localName"
+        v-model.trim="localName"
         rows="2"
         autosize
         type="textarea"
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+import { updateUserProfile } from '@/api/user'
 export default {
   name: 'UpdateName',
   components: {},
@@ -40,7 +42,34 @@ export default {
   },
   computed: {},
   watch: {},
-  methods: {},
+  methods: {
+    async onConfirm () {
+      this.$toast.loading({
+        message: '保存中...',
+        forbidClick: true, // 禁止背景点击
+        duration: 0 // 持续展示
+      })
+      try {
+        const localName = this.localName
+        if (!localName.length) {
+          this.$toast('昵称不能为空')
+          return
+        }
+        const { data } = await updateUserProfile({
+          name: localName
+        })
+        // 更新视图
+        this.$emit('input', localName)
+        // 关闭弹层
+        this.$emit('close')
+        // 提示成功
+        this.$toast.success('更新成功')
+        console.log(data)
+      } catch (error) {
+        this.$toast.fail('更新失败')
+      }
+    }
+  },
   created () {}
 }
 </script>
