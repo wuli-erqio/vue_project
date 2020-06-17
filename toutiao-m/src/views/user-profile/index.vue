@@ -68,7 +68,7 @@
       v-model="isUpdatePhotoShow"
       style="height: 100%"
       position="bottom">
-      <update-photo :img="img"/>
+      <update-photo :img="img" @close="isUpdatePhotoShow=false"/>
     </van-popup>
   </div>
 </template>
