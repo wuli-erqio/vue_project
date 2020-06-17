@@ -19,7 +19,8 @@
         fit="cover"
         round
         :src="user.photo"
-        @click="$refs.file.click()"></van-image>
+        @click="$refs.file.click()"
+        ></van-image>
     </van-cell>
     <van-cell
       title="昵称"
@@ -68,7 +69,11 @@
       v-model="isUpdatePhotoShow"
       style="height: 100%"
       position="bottom">
-      <update-photo :img="img" @close="isUpdatePhotoShow=false"/>
+      <update-photo
+        v-if="isUpdatePhotoShow"
+        :img="img"
+        @updata-photo="user.photo = $event"
+        @close="isUpdatePhotoShow=false" />
     </van-popup>
   </div>
 </template>
