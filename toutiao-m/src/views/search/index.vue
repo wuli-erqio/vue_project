@@ -52,14 +52,23 @@ export default {
   data () {
     return {
       searchText: '',
-      isReaultShow: false // 控制搜索结果的展示
+      isReaultShow: false, // 控制搜索结果的展示
+      searchHistories: []
     }
   },
   computed: {},
   watch: {},
   methods: {
     onSearch (val) {
+      // 更新文本框内容
       this.searchText = val
+      const index = this.searchHistories.indexOf(val)
+      // 存储搜索框历史记录
+      if (index !== -1) {
+        this.searchHistories.splice(index, 1)
+      }
+      this.searchHistories.unshift(val)
+      // 渲染搜索结果
       this.isReaultShow = true
     },
     onCancel () {
