@@ -36,7 +36,11 @@
             >关注</van-button>
         </van-cell>
         <!-- 文章内容 -->
-        <div class="article-content markdown-body" v-html="article.content"></div>
+        <div
+          class="article-content markdown-body"
+          v-html="article.content"
+          ref="article-content"
+        ></div>
         <van-divider>正文结束</van-divider>
       </div>
       <!-- 加载失败: 404 -->
@@ -81,16 +85,6 @@
 import { getArticleByID } from '@/api/article'
 import { ImagePreview } from 'vant'
 
-ImagePreview({
-  images: [
-    'https://img.yzcdn.cn/vant/apple-1.jpg',
-    'https://img.yzcdn.cn/vant/apple-2.jpg'
-  ],
-  startPosition: 1,
-  onClose () {
-    console.log('onClick')
-  }
-})
 export default {
   name: 'ArticleIndex',
   components: {},
@@ -115,6 +109,12 @@ export default {
       try {
         const { data } = await getArticleByID(this.articleId)
         this.article = data.data
+
+        // 初始化图片,点击预览
+        // this.$refs['article-content']
+        setTimeout(() => {
+          this.previewImage()
+        }, 0)
         // 请求成功, 关闭 loading
         // this.loading = false
       } catch (err) {
@@ -124,6 +124,22 @@ export default {
       }
       // 无论成功还是失败都要关闭loading
       this.loading = false
+    },
+    previewImage () {
+      const articleContent = this.$refs['article-content']
+      const imgs = articleContent.querySelectorAll('img')
+      const images = []
+      imgs.forEach((img, index) => {
+        images.push(img.src)
+        img.onclick = () => {
+          ImagePreview({
+            // 预览的图片地址数组
+            images,
+            // 起始位置,从0开始
+            startPosition: index
+          })
+        }
+      })
     }
   },
   created () {
