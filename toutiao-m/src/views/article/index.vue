@@ -14,7 +14,7 @@
       <!-- 加载完成-文章详情 -->
       <div class="article-detail">
         <!-- 文章标题 -->
-        <h1 class="article-title">这是文章标题</h1>
+        <h1 class="article-title">{{article.title}}</h1>
         <!-- 用户信息 -->
         <van-cell class="user-info" center :border="false">
           <van-image
@@ -22,14 +22,22 @@
             slot="icon"
             round
             fit="cover"
-            src="https://img.yzcdn.cn/vant/cat.jpeg"
+            :src="article.aut_photo"
           />
-          <div slot="title" class="user-name">力创头条</div>
-          <div slot="label" class="publish-date">14小时前</div>
+          <div slot="title" class="user-name">{{ article.aut_name}}</div>
+          <div slot="label" class="publish-date">{{ article.aut_pubdate | relativeTime }}</div>
           <van-button
             class="follow-btn"
-            type="info"></van-button>
+            type="info"
+            color="#3296fa"
+            round
+            size="small"
+            icon="plus"
+            >关注</van-button>
         </van-cell>
+        <!-- 文章内容 -->
+        <div class="article-content" v-html="article.content"></div>
+        <van-divider>正文结束</van-divider>
       </div>
       <!-- 加载失败: 404 -->
       <div class="error-wrap">
@@ -81,7 +89,9 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      article: {} // 文章详情
+    }
   },
   computed: {},
   watch: {},
@@ -89,7 +99,7 @@ export default {
     async loadArticle () {
       try {
         const { data } = await getArticleByID(this.articleId)
-        console.log(data)
+        this.article = data.data
       } catch (error) {
         console.log(error)
       }
