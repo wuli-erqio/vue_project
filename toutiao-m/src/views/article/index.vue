@@ -1,4 +1,3 @@
-<!--  -->
 <template>
   <div class='article-container'></div>
 </template>
@@ -7,7 +6,12 @@
 export default {
   name: 'ArticleIndex',
   components: {},
-  props: {},
+  props: {
+    articleId: {
+      type: [Number, String],
+      required: true
+    }
+  },
   data () {
     return {}
   },
@@ -15,14 +19,7 @@ export default {
   watch: {},
   methods: {},
   created () {},
-  mounted () {},
-  beforeCreate () {},
-  beforeMount () {},
-  beforeUpdate () {},
-  updated () {},
-  beforeDestroy () {},
-  destroyed () {},
-  activated () {}
+  mounted () {}
 }
 </script>
 <style lang='less' scoped>
