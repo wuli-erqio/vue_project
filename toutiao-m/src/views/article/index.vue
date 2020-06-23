@@ -6,13 +6,13 @@
       @click-left="$router.back()"></van-nav-bar>
     <div class="main-warp">
       <!-- 加载中 -->
-      <div class="loading-warp">
+      <div v-if="loading" class="loading-warp">
         <van-loading color="#3296fa" vertical>
           加载中
         </van-loading>
       </div>
       <!-- 加载完成-文章详情 -->
-      <div class="article-detail">
+      <div v-else-if="article.title" class="article-detail">
         <!-- 文章标题 -->
         <h1 class="article-title">{{article.title}}</h1>
         <!-- 用户信息 -->
@@ -40,15 +40,15 @@
         <van-divider>正文结束</van-divider>
       </div>
       <!-- 加载失败: 404 -->
-      <div class="error-wrap">
+      <div v-else-if="errStatus === 404" class="error-wrap">
         <van-icon name="failure"></van-icon>
         <p class="text">该资源不存在或已删除!</p>
       </div>
       <!-- 加载失败:其他未知错误(例如:网络原因或服务器异常) -->
-      <div class="error-wrap">
+      <div v-else class="error-wrap">
         <van-icon name="failure"></van-icon>
         <p class="text">内容加载失败!</p>
-        <van-button class="retry-btn">点击重试</van-button>
+        <van-button class="retry-btn" @click="loadArticle">点击重试</van-button>
       </div>
     </div>
     <!-- 底部区域 -->
@@ -85,24 +85,33 @@ export default {
   props: {
     articleId: {
       type: [Number, String, Object],
-      required: true
+      required: true,
+      errStatus: 0 // 失败的状态码
     }
   },
   data () {
     return {
-      article: {} // 文章详情
+      article: {}, // 文章详情
+      loading: true // 加载中的loading状态
     }
   },
   computed: {},
   watch: {},
   methods: {
     async loadArticle () {
+      this.loading = true
       try {
         const { data } = await getArticleByID(this.articleId)
         this.article = data.data
-      } catch (error) {
-        console.log(error)
+        // 请求成功, 关闭 loading
+        // this.loading = false
+      } catch (err) {
+        if (err.response && err.response.status === 404) {
+          this.errStatus = 404
+        }
       }
+      // 无论成功还是失败都要关闭loading
+      this.loading = false
     }
   },
   created () {
