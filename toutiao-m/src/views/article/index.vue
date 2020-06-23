@@ -1,7 +1,9 @@
 <template>
   <div class='article-container'>
     <!-- 导航栏 -->
-    <van-nav-bar class="page-nav-bar" left-arrow title="力创"></van-nav-bar>
+    <van-nav-bar class="page-nav-bar"
+      left-arrow title="力创"
+      @click-left="$router.back()"></van-nav-bar>
     <div class="main-warp">
       <!-- 加载中 -->
       <div class="loading-warp">
@@ -68,12 +70,13 @@
 </template>
 
 <script>
+import { getArticleByID } from '@/api/article'
 export default {
   name: 'ArticleIndex',
   components: {},
   props: {
     articleId: {
-      type: [Number, String],
+      type: [Number, String, Object],
       required: true
     }
   },
@@ -82,8 +85,19 @@ export default {
   },
   computed: {},
   watch: {},
-  methods: {},
-  created () {},
+  methods: {
+    async loadArticle () {
+      try {
+        const { data } = await getArticleByID(this.articleId)
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  },
+  created () {
+    this.loadArticle()
+  },
   mounted () {}
 }
 </script>

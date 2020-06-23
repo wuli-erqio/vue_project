@@ -3,10 +3,26 @@
  */
 import axios from 'axios'
 import store from '@/store'
+import JSONBig from 'json-bigint'
 
+// 可以处理数据中超出整数范围的数据
+// JSONBig.parse()
+// JSONBig.stringify()
+// JSONBig使用的时候需要把BigNumber 类型的数据转为字符串来使用
+// const jsonStr = '{"art_id": 1234567891034857388}'
+// JSONBig.parse(jsonStr).art_id.toString()
 const request = axios.create({
   // 接口基础路径
-  baseURL: 'http://ttapi.research.itcast.cn/'
+  baseURL: 'http://ttapi.research.itcast.cn/',
+  // axios 默认会在内部这样处理后端返回的数据
+  // data: 后端返回的原始数据,说白了就是JSON格式的字符串
+  transformResponse: [function (data) {
+    try {
+      return JSONBig.parse(data)
+    } catch (error) {
+      return data
+    }
+  }]
 })
 
 // 请求拦截器
