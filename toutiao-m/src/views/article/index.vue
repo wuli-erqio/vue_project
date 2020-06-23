@@ -79,6 +79,18 @@
 
 <script>
 import { getArticleByID } from '@/api/article'
+import { ImagePreview } from 'vant'
+
+ImagePreview({
+  images: [
+    'https://img.yzcdn.cn/vant/apple-1.jpg',
+    'https://img.yzcdn.cn/vant/apple-2.jpg'
+  ],
+  startPosition: 1,
+  onClose () {
+    console.log('onClick')
+  }
+})
 export default {
   name: 'ArticleIndex',
   components: {},
