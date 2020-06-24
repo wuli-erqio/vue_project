@@ -45,11 +45,25 @@
             :loading="followLoading"
             @click="onFollow"
             >关注</van-button> -->
-            <!-- 模板中的 $event是事件参数 -->
+            <!--
+              模板中的 $event是事件参数
+              当我们传递给子组件的数据既要使用还要修改
+                传递props
+                  :is-followed="article.is_followed"
+                修改：自定义事件
+                  @update-is_followed="article.is_followed = $event"
+              简写方式：在组件使用 v-model
+                value="article.is_followed"
+                @input="article.is_followed = $event"
+              如果需要修改v-model的规则名称，可以通过子组件的model修改
+
+              一个组件只能使用一次v-model
+              如果有多个数据需要实现类似于v-model的效果，怎么办？
+              可以使用属性的 .sync修饰符。
+            -->
             <follow-user
-              :is-followed="article.is_followed"
+              v-model="article.is_followed"
               :user-id="article.aut_id"
-              @update-is_followed="article.is_followed = $event"
               class="follow-btn"
             ></follow-user>
         </van-cell>

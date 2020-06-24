@@ -25,6 +25,11 @@ import { addFollow, deleteFollow } from '@/api/user'
 export default {
   name: 'FollowIndex',
   components: {},
+  // 自定义v-model的数据名称
+  model: {
+    prop: 'isFollowed', // 默认是value
+    event: 'update-is_followed' // 默认是input
+  },
   props: {
     isFollowed: {
       type: Boolean,
@@ -52,7 +57,9 @@ export default {
         }
         // 更新视图
         // this.article.is_followed = !this.article.is_followed
+        // this.$emit('update-is_followed', !this.value)
         this.$emit('update-is_followed', !this.isFollowed)
+        // this.$emit('input', !this.isFollowed)
       } catch (error) {
         let message = '操作失败，请重试!'
         if (error.response && error.response.status === 400) {
