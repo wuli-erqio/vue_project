@@ -100,10 +100,7 @@
         info="123"
         color="#777"
       />
-      <van-icon
-        color="#777"
-        name="star-o"
-      />
+      <collect-article class="btn-item"/>
       <van-icon
         color="#777"
         name="good-job-o"
@@ -117,11 +114,13 @@
 import { getArticleByID } from '@/api/article'
 import { ImagePreview } from 'vant'
 import FollowUser from '@/components/follow-user'
+import CollectArticle from '@/components/collect-article'
 
 export default {
   name: 'ArticleIndex',
   components: {
-    FollowUser
+    FollowUser,
+    CollectArticle
   },
   props: {
     articleId: {
@@ -290,7 +289,7 @@ export default {
       line-height: 46px;
       color: #a7a7a7;
     }
-    .van-icon {
+    /deep/.van-icon {
       font-size: 40px;
       .van-info {
         font-size: 16px;
