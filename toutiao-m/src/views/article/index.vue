@@ -74,6 +74,29 @@
           ref="article-content"
         ></div>
         <van-divider>正文结束</van-divider>
+        <!-- 底部区域 -->
+        <div class="article-bottom">
+          <van-button
+            class="comment-btn"
+            type="default"
+            round
+            size="small"
+          >写评论</van-button>
+          <van-icon
+            name="comment-o"
+            info="123"
+            color="#777"
+          />
+          <collect-article
+            v-model="article.is_collected"
+            class="btn-item"
+          />
+          <van-icon
+            color="#777"
+            name="good-job-o"
+          />
+          <van-icon name="share" color="#777777"></van-icon>
+        </div>
       </div>
       <!-- 加载失败: 404 -->
       <div v-else-if="errStatus === 404" class="error-wrap">
@@ -86,26 +109,6 @@
         <p class="text">内容加载失败!</p>
         <van-button class="retry-btn" @click="loadArticle">点击重试</van-button>
       </div>
-    </div>
-    <!-- 底部区域 -->
-    <div class="article-bottom">
-      <van-button
-        class="comment-btn"
-        type="default"
-        round
-        size="small"
-      >写评论</van-button>
-      <van-icon
-        name="comment-o"
-        info="123"
-        color="#777"
-      />
-      <collect-article class="btn-item"/>
-      <van-icon
-        color="#777"
-        name="good-job-o"
-      />
-      <van-icon name="share" color="#777777"></van-icon>
     </div>
   </div>
 </template>
