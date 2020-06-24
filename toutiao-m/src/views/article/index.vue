@@ -31,6 +31,7 @@
             class="follow-btn"
             round
             size="small"
+            :loading="followLoading"
             @click="onFollow"
             >已关注</van-button>
           <van-button
@@ -41,6 +42,7 @@
             round
             size="small"
             icon="plus"
+            :loading="followLoading"
             @click="onFollow"
             >关注</van-button>
         </van-cell>
@@ -108,7 +110,8 @@ export default {
   data () {
     return {
       article: {}, // 文章详情
-      loading: true // 加载中的loading状态
+      loading: true, // 加载中的loading状态
+      followLoading: false
     }
   },
   computed: {},
@@ -152,12 +155,15 @@ export default {
       })
     },
     async onFollow () {
+      // 展示loading
+      this.followLoading = true
       try {
         if (this.article.is_followed) {
           await deleteFollow(this.article.aut_id)
         } else {
           await addFollow(this.article.aut_id)
         }
+        // 更新视图
         this.article.is_followed = !this.article.is_followed
       } catch (error) {
         let message = '操作失败，请重试!'
@@ -166,6 +172,8 @@ export default {
         }
         this.$toast(message)
       }
+      // 关闭关注按钮的loading
+      this.followLoading = false
     }
   },
   created () {
