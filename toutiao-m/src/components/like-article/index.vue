@@ -31,6 +31,21 @@ export default {
   watch: {},
   methods: {
     async onLike () {
+      this.loading = true
+      try {
+        let status = -1
+        if (this.value === 1) {
+          await deleteLike(this.articleId)
+        } else {
+          await addLike(this.articleId)
+          status = 1
+        }
+        this.$emit('input', status)
+        this.$toast.success(status === 1 ? '点赞成功' : '取消点赞')
+      } catch (error) {
+        this.$toast.fail('点赞失败！')
+      }
+      this.loading = false
     }
   }
 }
