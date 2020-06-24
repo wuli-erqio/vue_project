@@ -89,6 +89,7 @@
           />
           <collect-article
             v-model="article.is_collected"
+            :article-id="article.art_id"
             class="btn-item"
           />
           <van-icon
