@@ -28,11 +28,15 @@ export default {
     source: {
       type: [Number, String, Object],
       required: true
+    },
+    list: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
     return {
-      list: [],
+      // list: [],
       loading: false,
       error: false,
       finished: false,

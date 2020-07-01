@@ -75,7 +75,7 @@
         ></div>
         <van-divider>正文结束</van-divider>
         <!-- 文章评论列表 -->
-        <comment-list @onload-success="totalCommentCount = $event.total_count" :source="article.art_id"/>
+        <comment-list :list="commentList" @onload-success="totalCommentCount = $event.total_count" :source="article.art_id"/>
         <!-- 底部区域 -->
         <div class="article-bottom">
           <van-button
@@ -100,7 +100,7 @@
         </div>
         <!-- 发布评论 -->
         <van-popup v-model="isPostShow" position="bottom">
-          <comment-post :target="article.art_id"/>
+          <comment-post :target="article.art_id" @post-success="onPostSuccess"/>
         </van-popup>
       </div>
       <!-- 加载失败: 404 -->
@@ -149,7 +149,8 @@ export default {
       loading: true, // 加载中的loading状态
       followLoading: false,
       totalCommentCount: 0,
-      isPostShow: false // 用来发布评论的显示和隐藏
+      isPostShow: false, // 用来发布评论的显示和隐藏
+      commentList: [] // 评论列表
     }
   },
   computed: {},
@@ -191,6 +192,12 @@ export default {
           })
         }
       })
+    },
+    onPostSuccess (data) {
+      // 关闭弹出层
+      this.isPostShow = false
+      // 将发布内容现时代列表顶部
+      this.commentList.unshift(data.now_obj)
     }
   },
   created () {
