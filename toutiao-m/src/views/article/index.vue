@@ -100,7 +100,7 @@
         </div>
         <!-- 发布评论 -->
         <van-popup v-model="isPostShow" position="bottom">
-          <comment-post />
+          <comment-post :target="article.art_id"/>
         </van-popup>
       </div>
       <!-- 加载失败: 404 -->
