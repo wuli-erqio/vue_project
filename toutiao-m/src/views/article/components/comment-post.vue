@@ -2,7 +2,7 @@
   <div class="comment-post">
     <van-field
       class="post-field"
-      v-model="message"
+      v-model.trim="message"
       rows="2"
       autosize
       type="textarea"
@@ -12,6 +12,7 @@
     />
     <van-button
       class="post-btn"
+      :disabled="!message.length"
       @click="onPost"
     >发布</van-button>
   </div>
