@@ -30,6 +30,7 @@ export default {
     return {
       list: [],
       loading: false,
+      error: false,
       finished: false,
       offset: null, // 获取下一页标记
       limit: 10
@@ -49,6 +50,9 @@ export default {
         })
         // 2.将数据添加到列表
         const { results } = data.data
+
+        // 把文章评论的总数传递到外部
+        this.$emit('onload-success', data.data)
         this.list.push(...results)
         // 3.将loading设置为false
         this.loading = false
@@ -66,15 +70,9 @@ export default {
       }
     }
   },
-  created () {},
-  mounted () {},
-  beforeCreate () {},
-  beforeMount () {},
-  beforeUpdate () {},
-  updated () {},
-  beforeDestroy () {},
-  destroyed () {},
-  activated () {}
+  created () {
+    this.onLoad()
+  }
 }
 </script>
 <style lang='less' scoped>

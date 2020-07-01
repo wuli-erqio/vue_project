@@ -75,7 +75,7 @@
         ></div>
         <van-divider>正文结束</van-divider>
         <!-- 文章评论列表 -->
-        <comment-list :source="article.art_id"/>
+        <comment-list @onload-success="totalCommentCount = $event.total_count" :source="article.art_id"/>
         <!-- 底部区域 -->
         <div class="article-bottom">
           <van-button
@@ -86,7 +86,7 @@
           >写评论</van-button>
           <van-icon
             name="comment-o"
-            info="123"
+            :info="totalCommentCount"
             color="#777"
           />
           <collect-article
@@ -140,7 +140,8 @@ export default {
     return {
       article: {}, // 文章详情
       loading: true, // 加载中的loading状态
-      followLoading: false
+      followLoading: false,
+      totalCommentCount: 0
     }
   },
   computed: {},
