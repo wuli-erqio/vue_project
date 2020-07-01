@@ -3,7 +3,7 @@
   <van-list
     v-model="loading"
     :finished="finished"
-    finished-text="没有更多了"
+    finished-text="已显示全部评论"
     @load="onLoad"
     :error="error"
     error-text="加载失败，请点击重试"
