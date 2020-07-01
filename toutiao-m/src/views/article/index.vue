@@ -83,6 +83,7 @@
             type="default"
             round
             size="small"
+            @click="isPostShow = !isPostShow"
           >写评论</van-button>
           <van-icon
             name="comment-o"
@@ -97,6 +98,8 @@
           <like-article v-model="article.attitude" :article-id="article.art_id"/>
           <van-icon name="share" color="#777777"></van-icon>
         </div>
+        <!-- 发布评论 -->
+        <van-popup v-model="isPostShow" position="bottom"></van-popup>
       </div>
       <!-- 加载失败: 404 -->
       <div v-else-if="errStatus === 404" class="error-wrap">
@@ -141,7 +144,8 @@ export default {
       article: {}, // 文章详情
       loading: true, // 加载中的loading状态
       followLoading: false,
-      totalCommentCount: 0
+      totalCommentCount: 0,
+      isPostShow: false // 用来发布评论的显示和隐藏
     }
   },
   computed: {},
