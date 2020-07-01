@@ -99,7 +99,9 @@
           <van-icon name="share" color="#777777"></van-icon>
         </div>
         <!-- 发布评论 -->
-        <van-popup v-model="isPostShow" position="bottom"></van-popup>
+        <van-popup v-model="isPostShow" position="bottom">
+          <comment-post />
+        </van-popup>
       </div>
       <!-- 加载失败: 404 -->
       <div v-else-if="errStatus === 404" class="error-wrap">
@@ -123,6 +125,7 @@ import FollowUser from '@/components/follow-user'
 import CollectArticle from '@/components/collect-article'
 import LikeArticle from '@/components/like-article'
 import CommentList from './components/comment-list'
+import CommentPost from './components/comment-post'
 
 export default {
   name: 'ArticleIndex',
@@ -130,7 +133,8 @@ export default {
     FollowUser,
     CollectArticle,
     LikeArticle,
-    CommentList
+    CommentList,
+    CommentPost
   },
   props: {
     articleId: {
