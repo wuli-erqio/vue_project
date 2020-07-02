@@ -9,11 +9,19 @@
         @click="$emit('close')"
       />
     </van-nav-bar>
-    <!-- 当前评论项 -->
-    <comment-item :comment="comment"></comment-item>
-    <van-cell title="全部回复" />
-    <comment-list
-      :source="comment.com_id" type="c" />
+    <!-- 滚动范围 -->
+    <div class="scroll-wrap">
+      <!-- 当前评论项 -->
+      <comment-item :comment="comment"></comment-item>
+      <van-cell title="全部回复" />
+      <comment-list
+        :source="comment.com_id"
+        type="c" />
+    </div>
+      <!-- 发布评论 -->
+    <div class="post-warp">
+      <van-button class="post-btn" size="small" round>写评论</van-button>
+    </div>
   </div>
 </template>
 
@@ -50,4 +58,27 @@ export default {
 }
 </script>
 <style lang='less' scoped>
+.scroll-wrap {
+  position: fixed;
+  top: 92px;
+  bottom: 88px;
+  left: 0;
+  right: 0;
+  overflow: auto;
+}
+.post-warp {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-top: 1px solid #d8d8d8;
+  .post-btn {
+    width: 60%;
+  }
+}
 </style>
