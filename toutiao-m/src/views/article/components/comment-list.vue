@@ -1,4 +1,4 @@
-<!--  -->
+<!-- 只有List在可视范围内才会检查滚动位置触发onLoad -->
 <template>
   <van-list
     v-model="loading"
@@ -7,6 +7,7 @@
     @load="onLoad"
     :error="error"
     error-text="加载失败，请点击重试"
+    :immediate-check="false"
     >
     <comment-item
       v-for="(item, index) in list"
@@ -53,8 +54,12 @@ export default {
       limit: 10
     }
   },
-  computed: {},
-  watch: {},
+  created () {
+    // 当你手动初始onload的话，他不会自动开始初始化的loading
+    // 所以我们要自己手动的开启loading
+    this.loading = true
+    this.onLoad()
+  },
   methods: {
     async onLoad () {
       // 1.请求数据
@@ -86,9 +91,6 @@ export default {
         this.loading = false
       }
     }
-  },
-  created () {
-    this.onLoad()
   }
 }
 </script>
