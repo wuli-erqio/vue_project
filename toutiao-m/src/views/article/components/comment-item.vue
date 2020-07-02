@@ -41,7 +41,8 @@ export default {
   components: {},
   props: {
     comment: {
-      type: Object
+      type: Object,
+      required: true
     }
   },
   data () {

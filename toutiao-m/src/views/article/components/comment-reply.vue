@@ -12,7 +12,7 @@
     <!-- 滚动范围 -->
     <div class="scroll-wrap">
       <!-- 当前评论项 -->
-      <comment-item :comment="comment"></comment-item>
+      <comment-item :comment="comment" />
       <van-cell title="全部回复" />
       <comment-list
         :source="comment.com_id"
@@ -21,7 +21,11 @@
     </div>
       <!-- 底部区域 -->
     <div class="post-warp">
-      <van-button @click="isPostShow=true" class="post-btn" size="small" round>写评论</van-button>
+      <van-button
+        @click="isPostShow=true"
+        class="post-btn"
+        size="small"
+        round>写评论</van-button>
     </div>
     <!-- 发布评论 -->
     <van-popup v-model="isPostShow" position="bottom">
