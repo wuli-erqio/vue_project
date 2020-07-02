@@ -116,8 +116,12 @@
       </div>
     </div>
     <!-- 评论回复 -->
-    <van-popup v-model="isReplyShow" position="bottom" style="height: 100%;">
-      <comment-post :target="article.art_id" @post-success="onPostSuccess"/>
+    <van-popup
+      v-model="isReplyShow"
+      position="bottom"
+      style="height: 100%;"
+      @replay-click="onReplayClick">
+      <comment-post />
     </van-popup>
   </div>
 </template>
@@ -203,6 +207,9 @@ export default {
       this.isPostShow = false
       // 将发布内容现时代列表顶部
       this.commentList.unshift(data.now_obj)
+    },
+    onReplayClick (comment) {
+      this.isReplyShow = true
     }
   },
   created () {

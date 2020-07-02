@@ -12,6 +12,7 @@
       v-for="(item, index) in list"
       :key="index"
       :comment="item"
+      @replay-click="$emit('replay-click', $event)"
     />
   </van-list>
 </template>
