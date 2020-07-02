@@ -115,6 +115,10 @@
         <van-button class="retry-btn" @click="loadArticle">点击重试</van-button>
       </div>
     </div>
+    <!-- 评论回复 -->
+    <van-popup v-model="isReplyShow" position="bottom" style="height: 100%;">
+      <comment-post :target="article.art_id" @post-success="onPostSuccess"/>
+    </van-popup>
   </div>
 </template>
 
@@ -150,7 +154,8 @@ export default {
       followLoading: false,
       totalCommentCount: 0,
       isPostShow: false, // 用来发布评论的显示和隐藏
-      commentList: [] // 评论列表
+      commentList: [], // 评论列表
+      isReplyShow: false
     }
   },
   computed: {},
