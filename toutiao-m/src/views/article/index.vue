@@ -120,8 +120,10 @@
       v-model="isReplyShow"
       position="bottom"
       style="height: 100%;"
-      @replay-click="onReplayClick">
-      <comment-repaly />
+      @reply-click="onReplyClick">
+      <comment-reply
+        @close="isReplyShow = false"
+        :comment="currentComment" />
     </van-popup>
   </div>
 </template>
@@ -134,7 +136,7 @@ import CollectArticle from '@/components/collect-article'
 import LikeArticle from '@/components/like-article'
 import CommentList from './components/comment-list'
 import CommentPost from './components/comment-post'
-import CommentRepaly from './components/comment-replay'
+import CommentReply from './components/comment-reply'
 
 export default {
   name: 'ArticleIndex',
@@ -144,7 +146,7 @@ export default {
     LikeArticle,
     CommentList,
     CommentPost,
-    CommentRepaly
+    CommentReply
   },
   props: {
     articleId: {
@@ -161,7 +163,8 @@ export default {
       totalCommentCount: 0,
       isPostShow: false, // 用来发布评论的显示和隐藏
       commentList: [], // 评论列表
-      isReplyShow: false
+      isReplyShow: false,
+      currentComment: {} // 当前点击的评论项
     }
   },
   computed: {},
@@ -210,7 +213,8 @@ export default {
       // 将发布内容现时代列表顶部
       this.commentList.unshift(data.now_obj)
     },
-    onReplayClick (comment) {
+    onReplyClick (comment) {
+      this.currentComment = comment
       this.isReplyShow = true
     }
   },
