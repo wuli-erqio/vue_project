@@ -75,7 +75,7 @@
         ></div>
         <van-divider>正文结束</van-divider>
         <!-- 文章评论列表 -->
-        <comment-list :list="commentList" @onload-success="totalCommentCount = $event.total_count" :source="article.art_id"/>
+        <comment-list  @reply-click="onReplyClick" :list="commentList" @onload-success="totalCommentCount = $event.total_count" :source="article.art_id"/>
         <!-- 底部区域 -->
         <div class="article-bottom">
           <van-button
@@ -119,9 +119,9 @@
     <van-popup
       v-model="isReplyShow"
       position="bottom"
-      style="height: 100%;"
-      @reply-click="onReplyClick">
+      style="height: 100%;">
       <comment-reply
+        v-if="isReplyShow"
         @close="isReplyShow = false"
         :comment="currentComment"
       />
