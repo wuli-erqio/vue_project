@@ -116,6 +116,7 @@
       </div>
     </div>
     <!-- 评论回复 -->
+    <!-- 弹出层是懒加载渲染的，只有第一次加载，后边在加载弹层，都是在切换显示与隐藏，所以无论是那个评论回复，回复评论内容都一样 -->
     <van-popup
       v-model="isReplyShow"
       position="bottom"
@@ -154,6 +155,11 @@ export default {
       type: [Number, String, Object],
       required: true,
       errStatus: 0 // 失败的状态码
+    }
+  },
+  provide: function () {
+    return {
+      articleId: this.articleId
     }
   },
   data () {

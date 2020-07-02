@@ -18,22 +18,29 @@
         :source="comment.com_id"
         type="c" />
     </div>
-      <!-- 发布评论 -->
+      <!-- 底部区域 -->
     <div class="post-warp">
-      <van-button class="post-btn" size="small" round>写评论</van-button>
+      <van-button @click="isPostShow=true" class="post-btn" size="small" round>写评论</van-button>
     </div>
+    <!-- 发布评论 -->
+    <van-popup v-model="isPostShow" position="bottom">
+      <comment-post :target="comment.com_id" />
+    </van-popup>
   </div>
 </template>
 
 <script>
 import CommentItem from './comment-item'
 import CommentList from './comment-list'
+import CommentPost from './comment-post'
 export default {
   name: 'CommentReply',
   components: {
     CommentItem,
-    CommentList
+    CommentList,
+    CommentPost
   },
+  inject: ['articleId'],
   props: {
     comment: {
       type: Object,
@@ -41,7 +48,9 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      isPostShow: false
+    }
   },
   computed: {},
   watch: {},
