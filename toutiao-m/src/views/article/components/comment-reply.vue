@@ -12,13 +12,14 @@
     <!-- 当前评论项 -->
     <comment-item :comment="comment"></comment-item>
     <van-cell title="全部回复" />
-    <comment-list :source />
+    <comment-list
+      :source="comment.com_id" type="c" />
   </div>
 </template>
 
 <script>
 import CommentItem from './comment-item'
-import CommentList from './components/comment-list'
+import CommentList from './comment-list'
 export default {
   name: 'CommentReply',
   components: {

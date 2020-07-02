@@ -123,7 +123,8 @@
       @reply-click="onReplyClick">
       <comment-reply
         @close="isReplyShow = false"
-        :comment="currentComment" />
+        :comment="currentComment"
+      />
     </van-popup>
   </div>
 </template>

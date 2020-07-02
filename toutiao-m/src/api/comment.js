@@ -10,6 +10,9 @@ export const getComments = params => {
   return request({
     method: 'GET',
     url: '/app/v1_0/comments',
+    // get参数使用params进行传参
+    // 我们写的时候是对象，但是最终发给后端的数据是
+    // axios会把params对象转为key=value?key=value的格式放到URL上
     params
   })
 }
