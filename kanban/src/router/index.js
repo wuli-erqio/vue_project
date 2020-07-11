@@ -9,8 +9,10 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    redirect: '/kanban1',
     children: [
-      { path: '/kanban1', name: 'kanban1', component: () => import('@/views/Echars/kanban1') }
+      { path: '/kanban1', name: 'kanban1', component: () => import('@/views/Echarts/kanban1') },
+      { path: '/kanban2', name: 'kanban2', component: () => import('@/views/Echarts/kanban2') }
     ]
   }
 ]

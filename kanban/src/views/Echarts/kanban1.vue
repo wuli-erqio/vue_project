@@ -155,6 +155,9 @@ export default {
       const myChart = this.$echarts.init(this.$refs.chart1)
       // 绘制图表
       myChart.setOption({
+        tooltip: {
+          trigger: 'axis'
+        },
         grid: {
           top: '0',
           left: '10px',
