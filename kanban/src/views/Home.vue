@@ -6,6 +6,7 @@
           <template slot="title"><i class="el-icon-s-data"></i>Echars</template>
           <el-menu-item index="kanban1"><i class="el-icon-s-data"></i>看板1</el-menu-item>
           <el-menu-item index="kanban2"><i class="el-icon-s-data"></i>看板2</el-menu-item>
+          <el-menu-item index="kanban3"><i class="el-icon-s-data"></i>看板3</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title"><i class="el-icon-menu"></i>JS</template>

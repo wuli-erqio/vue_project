@@ -6,6 +6,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import echarts from 'echarts'
 
+import './assets/style/base.less'
+
 Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
