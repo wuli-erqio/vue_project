@@ -10,13 +10,12 @@
         </el-submenu>
         <el-submenu index="2">
           <template slot="title"><i class="el-icon-menu"></i>JS</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
           <el-menu-item index="2-2">选项2</el-menu-item>
           <el-menu-item index="2-3">选项3</el-menu-item>
         </el-submenu>
         <el-submenu index="3">
           <template slot="title"><i class="el-icon-setting"></i>CSS</template>
-          <el-menu-item index="3-1">选项1</el-menu-item>
+          <el-menu-item index="button"><i class="el-icon-orange"></i>按钮</el-menu-item>
           <el-menu-item index="3-2">选项2</el-menu-item>
           <el-menu-item index="3-3">选项3</el-menu-item>
         </el-submenu>
