@@ -9,6 +9,9 @@
         <div class="col">
           <button class="btn">hover me</button>
         </div>
+        <div class="col">
+          <span>流光按钮</span>
+        </div>
         <div class="col"></div>
         <div class="col"></div>
       </div>
@@ -16,8 +19,22 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col"></div>
+        <div class="col"></div>
       </div>
       <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+      <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+      <div class="row">
+        <div class="col"></div>
         <div class="col"></div>
         <div class="col"></div>
         <div class="col"></div>
@@ -68,20 +85,19 @@ export default {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    .col {
+      flex: 3;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .row {
       flex: 1;
       display: flex;
-      .col {
-        flex: 3;
-        height: 100%;
-      }
-      .col:nth-child(2) {
-        margin: 0 20px;
-      }
+    }
+    .row:nth-child(1) {
       .col:nth-child(1) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         .btn {
           width: 200px;
           height: 40px;
@@ -116,6 +132,46 @@ export default {
         }
         .btn:hover::after {
           right: 80%;
+        }
+      }
+      .col:nth-child(2) {
+        span {
+          position: relative;
+          display: inline-block;
+          font-style: 24px;
+          background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+          background-size: 400%;
+          width:200px;
+          height: 55px;
+          color: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 30px;
+          cursor: pointer;
+          z-index: 1;
+        }
+        span::before {
+          content: "";
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          left: -5px;
+          bottom: -5px;
+          background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+          background-size: 400%;
+          border-radius: 30px;
+          filter: blur(10px);
+          z-index: -1;
+        }
+        span:hover,
+        span:hover::before {
+          animation: sun 6s infinite;
+        }
+        @keyframes sun {
+          100% {
+            background-position: -400% 0;
+          }
         }
       }
     }
