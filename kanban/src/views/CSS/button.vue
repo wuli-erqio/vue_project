@@ -17,7 +17,9 @@
       </div>
       <div class="row">
         <div class="col"></div>
-        <div class="col"></div>
+        <div class="col">
+          <div class="btn" @click="btnClick" ref="btns">泛起涟漪</div>
+        </div>
         <div class="col"></div>
         <div class="col"></div>
       </div>
@@ -49,16 +51,39 @@ export default {
   components: {},
   props: {},
   data () {
-    return {}
+    return {
+      timer: null
+    }
   },
   computed: {},
-  watch: {},
-  methods: {},
+  methods: {
+    btnClick () {
+      const btn = this.$refs.btns
+      var that = this
+      btn.addEventListener('click', function (e) {
+        that.clearSpan()
+        const x = e.clientX - e.target.offsetLeft
+        const y = e.clientY - e.target.offsetTop
+
+        const ripples = document.createElement('span')
+        ripples.style.left = x + 'px'
+        ripples.style.top = y + 'px'
+        this.appendChild(ripples)
+
+        this.timer = setTimeout(() => {
+          ripples.remove()
+        }, 1000)
+      }, false)
+    },
+    clearSpan () {
+      clearTimeout(this.timer)
+    }
+  },
   created () {},
   mounted () {}
 }
 </script>
-<style lang='less' scoped>
+<style lang='less'>
 .container {
   height: 100%;
   background-color: #353b48;
@@ -100,7 +125,7 @@ export default {
       .col:nth-child(1) {
         .btn {
           width: 200px;
-          height: 40px;
+          height: 55px;
           background: none;
           border: 4px solid;
           color: #3498db;
@@ -166,7 +191,7 @@ export default {
         }
         span:hover,
         span:hover::before {
-          animation: sun 6s infinite;
+          animation: sun 7s linear infinite;
         }
         @keyframes sun {
           100% {
@@ -177,6 +202,46 @@ export default {
     }
     .row:nth-child(2) {
       margin: 20px 0;
+      .col:nth-child(2) {
+        .btn {
+          position: relative;
+          width: 200px;
+          height: 60px;
+          border-radius: 30px;
+          border: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          font-size: 18px;
+          background: linear-gradient(90deg,#6c5ce7, #e84393);
+          overflow: hidden;
+          cursor: pointer;
+          span {
+            display: block;
+            position: absolute;
+            background: rgba(255, 255, 255, .5);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            border-radius: 50%;
+            opacity: .5;
+            animation: animate 1s linear;
+            z-index: 100;
+          }
+          @keyframes animate {
+            0% {
+              width: 0;
+              height: 0;
+              opacity: .5;
+            }
+            100% {
+              width: 500px;
+              height: 500px;
+              opacity: 0;
+            }
+          }
+        }
+      }
     }
   }
 }
