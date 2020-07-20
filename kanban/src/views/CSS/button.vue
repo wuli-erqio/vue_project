@@ -21,12 +21,29 @@
             流光倒影
           </div>
         </div>
-        <div class="col"></div>
-      </div>
-      <div class="row">
-        <div class="col"></div>
         <div class="col">
           <div class="btn" @click="btnClick" ref="btns">泛起涟漪</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="firefly">
+            <p>萤火虫动态按钮</p>
+            <div class="lightning">
+              <ul ref="lghs">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+          </button>
+        </div>
+        <div class="col">
         </div>
         <div class="col"></div>
         <div class="col"></div>
@@ -85,13 +102,31 @@ export default {
     },
     clearSpan () {
       clearTimeout(this.timer)
+    },
+    firefly () {
+      var lghs = this.$refs.lghs.children
+      for (const k in lghs) {
+        lghs[k].style.left = this.randomNum(-20, 90) + '%'
+        lghs[k].style.bottom = this.randomNum(-30, 30) + '%'
+        lghs[k].style.animationDuration = this.randomNum(1, 5) + 's'
+      }
+    },
+    randomNum (max, min) {
+      var num = Math.floor(Math.random() * (max - min + 1) + min)
+      return num
     }
   },
   created () {},
-  mounted () {}
+  mounted () {
+    this.firefly()
+  }
 }
 </script>
 <style lang='less'>
+@font-face {
+  font-family: 'firefly';
+  src: url('../../assets/font/悠哉字体.ttf');
+}
 .container {
   height: 100%;
   background-color: #353b48;
@@ -110,7 +145,7 @@ export default {
       left: 0;
       height: 3px;
       width: 100%;
-      background: -webkit-linear-gradient(left, #353b48, #1C1F50 ,#353b48);
+      background: linear-gradient(left, #353b48, #1C1F50 ,#353b48);
     }
   }
   .main {
@@ -300,10 +335,7 @@ export default {
             }
           }
       }
-    }
-    .row:nth-child(2) {
-      margin: 20px 0;
-      .col:nth-child(2) {
+      .col:nth-child(4) {
         .btn {
           position: relative;
           width: 200px;
@@ -340,6 +372,70 @@ export default {
               height: 500px;
               opacity: 0;
             }
+          }
+        }
+      }
+    }
+    .row:nth-child(2) {
+      margin: 20px 0;
+      .col:nth-child(1) {
+        button {
+          outline: none;
+          border: none;
+        }
+        .firefly {
+          width: 200px;
+          height: 50px;
+          position: relative;
+          background: linear-gradient(to right, #6EB46E 10%, #55B455);
+          border-radius: 40px;
+          opacity: .88;
+          cursor: pointer;
+          transition: 1s;
+          overflow: hidden;
+          p {
+            font-size: 22px;
+            color: #F5DDBF;
+            font-family: firefly;
+            opacity: .88;
+          }
+          .lightning {
+            width: 95%;
+            height: 80%;
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%);
+            border-radius: 40px;
+            transition: .8s;
+            ul {
+              opacity: 0;
+              transition: .8s;
+              li {
+                width: 5px;
+                height: 5px;
+                background-color: #91FA91;
+                position: absolute;
+                bottom: 10%;
+                border-radius: 50%;
+                opacity: .6;
+                animation: fireflymove infinite linear;
+              }
+            }
+          }
+        }
+        .firefly:hover {
+          box-shadow: 0 0 10px #B4FFB4;
+          .lightning {
+            box-shadow: 0 0 4px #B4FFB4 inset;
+            ul {
+              opacity: .8;
+            }
+          }
+        }
+        @keyframes fireflymove {
+          100% {
+            bottom: 100%
           }
         }
       }
