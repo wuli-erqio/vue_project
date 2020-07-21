@@ -49,7 +49,12 @@
         <div class="col"></div>
       </div>
       <div class="row">
-        <div class="col"></div>
+        <div class="col">
+          <ul>
+            <li class="prev"><span></span></li>
+            <li class="next"><span></span></li>
+          </ul>
+        </div>
         <div class="col"></div>
         <div class="col"></div>
         <div class="col"></div>
@@ -436,6 +441,78 @@ export default {
         @keyframes fireflymove {
           100% {
             bottom: 100%
+          }
+        }
+      }
+    }
+    .row:nth-child(3) {
+      .col:nth-child(1) {
+        ul {
+          position: relative;
+          display: flex;
+          li {
+            width: 80px;
+            height: 80px;
+            background-color: #000;
+            margin: 0 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: .5s;
+            span {
+              position: absolute;
+              top: 50%;
+              width: 20px;
+              height: 20px;
+              border: 4px solid #fff;
+              transition: .5s;
+            }
+          }
+          .next span {
+            right: 20%;
+            transform: translateY(-50%) rotate(-45deg);
+            border-left: none;
+            border-top: none;
+            &::before{
+              content: '';
+              position: absolute;
+              width: 38px;
+              height: 4px;
+              background: #fff;
+              transform-origin: right;
+              transform: rotate(45deg) translate(-4px, 25px) scaleX(0);
+              transition: .5s;
+            }
+          }
+          .next:hover span {
+            right: 16%;
+            &::before {
+              transform: rotate(45deg) translate(-4px, 25px) scaleX(1);
+            }
+          }
+          .prev span {
+            left: 20%;
+            transform: translateY(-50%) rotate(-45deg);
+            border-right: none;
+            border-bottom: none;
+            &::before{
+              content: '';
+              position: absolute;
+              width: 38px;
+              height: 4px;
+              background: #fff;
+              transform-origin: left;
+              transform: rotate(45deg) translate(-2px, -1px) scaleX(0);
+              transition: .5s;
+            }
+          }
+          .prev:hover span {
+            left: 16%;
+            &::before {
+              transform: rotate(45deg) translate(-2px, -1px) scaleX(1);
+            }
+          }
+          li:hover {
+            background-color: #0070ff;
           }
         }
       }
