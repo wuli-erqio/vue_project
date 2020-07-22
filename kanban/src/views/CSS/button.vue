@@ -44,6 +44,14 @@
           </button>
         </div>
         <div class="col">
+          <button @click="toggleRow2Col2" :class="{'active': isActive, 'login': isLogin}" ref="active">
+            <p>LOGIN</p>
+            <ul :class="{'show': isShow}">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </button>
         </div>
         <div class="col"></div>
         <div class="col"></div>
@@ -82,7 +90,10 @@ export default {
   props: {},
   data () {
     return {
-      timer: null
+      timer: null,
+      isLogin: true,
+      isActive: true,
+      isShow: true
     }
   },
   computed: {},
@@ -113,17 +124,22 @@ export default {
       for (const k in lghs) {
         lghs[k].style.left = this.randomNum(-20, 90) + '%'
         lghs[k].style.bottom = this.randomNum(-30, 30) + '%'
-        lghs[k].style.animationDuration = this.randomNum(1, 5) + 's'
+        lghs[k].style.animationDuration = this.randomNum(1, 6) + 's'
       }
     },
     randomNum (max, min) {
       var num = Math.floor(Math.random() * (max - min + 1) + min)
       return num
+    },
+    toggleRow2Col2 () {
+      this.isActive = !this.isActive
+      this.isShow = !this.isShow
     }
   },
   created () {},
   mounted () {
     this.firefly()
+    this.toggleRow2Col2()
   }
 }
 </script>
@@ -442,6 +458,83 @@ export default {
           100% {
             bottom: 100%
           }
+        }
+      }
+      .col:nth-child(2) {
+        .login {
+          position: relative;
+          border: none;
+          outline: none;
+          width: 200px;
+          height: 50px;
+          background-color: #000;
+          color: #fff;
+          font-size: 24px;
+          font-weight: bold;
+          transition: .5s;
+          .show {
+            display: flex;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            li {
+              width: 4px;
+              height: 4px;
+              margin: 0 3px;
+              border-radius: 50%;
+              background: #fff;
+            }
+            li:nth-child(1) {
+              animation: jump1 .75s linear infinite;
+            }
+            @keyframes jump1 {
+              0% {
+                transform: translateY(-50%);
+              }
+              50% {
+                transform: translateY(10%);
+              }
+              100% {
+                transform: translateY(-50%);
+              }
+            }
+            li:nth-child(2) {
+              animation: jump2 .75s linear infinite;
+              animation-delay: .25s;
+            }
+            @keyframes jump2 {
+              0% {
+                transform: translateY(-50%);
+              }
+              50% {
+                transform: translateY(10%);
+              }
+              100% {
+                transform: translateY(-50%);
+              }
+            }
+            li:nth-child(3) {
+              animation: jump3 .75s linear infinite;
+              animation-delay: .5s;
+            }
+            @keyframes jump3 {
+              0% {
+                transform: translateY(-50%);
+              }
+              50% {
+                transform: translateY(10%);
+              }
+              100% {
+                transform: translateY(-50%);
+              }
+            }
+          }
+        }
+        .active {
+          width: 50px;
+          border-radius: 50%;
+          color: transparent;
         }
       }
     }
