@@ -53,7 +53,9 @@
             </ul>
           </button>
         </div>
-        <div class="col"></div>
+        <div class="col">
+          <button><span>delete</span><span>X</span></button>
+        </div>
         <div class="col"></div>
       </div>
       <div class="row">
@@ -92,8 +94,8 @@ export default {
     return {
       timer: null,
       isLogin: true,
-      isActive: true,
-      isShow: true
+      isActive: false,
+      isShow: false
     }
   },
   computed: {},
@@ -144,6 +146,10 @@ export default {
 }
 </script>
 <style lang='less'>
+button {
+  outline: none;
+  border: none;
+}
 @font-face {
   font-family: 'firefly';
   src: url('../../assets/font/悠哉字体.ttf');
@@ -400,10 +406,6 @@ export default {
     .row:nth-child(2) {
       margin: 20px 0;
       .col:nth-child(1) {
-        button {
-          outline: none;
-          border: none;
-        }
         .firefly {
           width: 200px;
           height: 50px;
@@ -466,7 +468,7 @@ export default {
           border: none;
           outline: none;
           width: 200px;
-          height: 50px;
+          height: 60px;
           background-color: #000;
           color: #fff;
           font-size: 24px;
@@ -481,7 +483,7 @@ export default {
             li {
               width: 4px;
               height: 4px;
-              margin: 0 3px;
+              margin: 0 4px;
               border-radius: 50%;
               background: #fff;
             }
@@ -532,9 +534,59 @@ export default {
           }
         }
         .active {
-          width: 50px;
+          width: 60px;
           border-radius: 50%;
           color: transparent;
+        }
+      }
+      .col:nth-child(3) {
+        button {
+          overflow: hidden;
+          position: relative;
+          width: 200px;
+          height: 60px;
+          color: #fff;
+          font-size: 24px;
+          background: #b10707;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          span:nth-child(1) {
+            margin-right: 40px;
+          }
+          span:nth-child(2) {
+            position: absolute;
+            right: 0;
+            top: 25%;
+            width: 60px;
+            height: 60px;
+            display: inline-block;
+            cursor: pointer;
+            animation: swiper2 1s linear forwards;
+            &:hover {
+              animation: swiper1 1s linear forwards;
+              background: #b10707;
+            }
+          }
+          span:nth-child(2)::after {
+            content: "";
+            width: 2px;
+            height: 50px;
+            position: absolute;
+            top: -10px;
+            left: 5px;
+            background:linear-gradient(45deg, #b10707,#fff, #b10707);
+          }
+          @keyframes swiper1 {
+            100% {
+              width: 105%;
+            }
+          }
+          @keyframes swiper2 {
+            100% {
+              width: 60px;
+            }
+          }
         }
       }
     }
