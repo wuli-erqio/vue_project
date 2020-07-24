@@ -56,7 +56,9 @@
         <div class="col">
           <button><span>delete</span><span>X</span></button>
         </div>
-        <div class="col"></div>
+        <div class="col">
+          <button>抖动</button>
+        </div>
       </div>
       <div class="row">
         <div class="col">
@@ -562,7 +564,7 @@ button {
             height: 60px;
             display: inline-block;
             cursor: pointer;
-            animation: swiper2 1s linear forwards;
+            animation: 1s;
             &:hover {
               animation: swiper1 1s linear forwards;
               background: #b10707;
@@ -582,10 +584,35 @@ button {
               width: 105%;
             }
           }
-          @keyframes swiper2 {
-            100% {
-              width: 60px;
-            }
+        }
+      }
+      .col:nth-child(4) {
+        button {
+          width: 200px;
+          height: 50px;
+          border: 3px solid #3498db;
+          background: none;
+          color: #fff;
+          font-size: 20px;
+          &:hover {
+            animation: row2col4 1s linear infinite;
+          }
+        }
+        @keyframes row2col4 {
+          0% {
+            transform: scale(1.1)
+          }
+          25% {
+            transform: scale(1.1) rotate(5deg)
+          }
+          50% {
+            transform: scale(1.1) rotate(0deg)
+          }
+          75% {
+            transform: scale(1.1) rotate(-5deg)
+          }
+          50% {
+            transform: scale(1.1) rotate(0deg)
           }
         }
       }
