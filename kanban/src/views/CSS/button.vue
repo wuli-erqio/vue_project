@@ -70,7 +70,9 @@
         <div class="col">
           <button>上滑 <span></span></button>
         </div>
-        <div class="col"></div>
+        <div class="col">
+          <button>缩放按钮</button>
+        </div>
         <div class="col"></div>
       </div>
       <div class="row">
@@ -725,13 +727,44 @@ button {
           border-top: 3px solid #03a9f4;
           border-right: 3px solid #03a9f4;
         }
-      }
-      @keyframes swiperUp {
-        0% {
-          height: 0px;
+        @keyframes swiperUp {
+          0% {
+            height: 0px;
+          }
+          100% {
+            height: 100%;
+          }
         }
-        100% {
-          height: 100%;
+      }
+      .col:nth-child(3) {
+        button {
+          width: 200px;
+          height: 55px;
+          background-color: rgba(0, 209, 178, 1);
+          border: 3px solid #00D1B2;
+          color: #fff;
+          font-size: 18px;
+          font-weight: bold;
+          transition: .5s;
+        }
+        button:hover {
+          background-color: rgba(0, 209, 178, .3);
+          transition: .5s;
+          animation: scale .5s ease forwards;
+        }
+        @keyframes scale {
+          0% {
+            transform: scale(.8, 1.1);
+          }
+          25% {
+            transform: scale(1, 1);
+          }
+          75% {
+            transform: scale(.9, 1);
+          }
+          100% {
+            transform: scale(1, 1)
+          }
         }
       }
     }
