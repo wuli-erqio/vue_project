@@ -73,7 +73,9 @@
         <div class="col">
           <button>缩放按钮</button>
         </div>
-        <div class="col"></div>
+        <div class="col">
+          <button>阴影外扩</button>
+        </div>
       </div>
       <div class="row">
         <div class="col"></div>
@@ -598,6 +600,7 @@ button {
           background: none;
           color: #fff;
           font-size: 20px;
+          border-radius: 10px;
           &:hover {
             animation: row2col4 1s linear infinite;
           }
@@ -745,6 +748,7 @@ button {
           color: #fff;
           font-size: 18px;
           font-weight: bold;
+          border-radius: 10px;
           transition: .5s;
         }
         button:hover {
@@ -764,6 +768,48 @@ button {
           }
           100% {
             transform: scale(1, 1)
+          }
+        }
+      }
+      .col:nth-child(4) {
+        button {
+          position: relative;
+          width: 200px;
+          height: 55px;
+          background-color: rgba(0, 209, 178, 1);
+          border: 3px solid #00D1B2;
+          color: #fff;
+          font-size: 18px;
+          font-weight: bold;
+          transition: .5s;
+          border-radius: 10px;
+        }
+        button:hover {
+          background-color: rgba(0, 209, 178, .3);
+          transition: .5s;
+            &::before {
+              content: "";
+              position: absolute;
+              top: -3px;
+              left: -3px;
+              width: 220px;
+              border-radius: 10px;
+              height: 74px;
+              background: rgba(0, 209, 178, .8);
+              animation: identifier 1s forwards;
+          }
+          @keyframes identifier {
+            0% {
+              width: 200px;
+              height: 55px;
+            }
+            100% {
+              width: 224px;
+              height: 80px;
+              top: -15px;
+              left: -15px;
+              opacity: 0;
+            }
           }
         }
       }
