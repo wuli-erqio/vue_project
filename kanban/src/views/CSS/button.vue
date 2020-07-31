@@ -81,7 +81,9 @@
         <div class="col">
           <button>阴影外扩</button>
         </div>
-        <div class="col"></div>
+        <div class="col">
+          <button>OPEN</button>
+        </div>
         <div class="col"></div>
         <div class="col"></div>
       </div>
@@ -788,28 +790,24 @@ button {
         }
         button:hover {
           background-color: rgba(0, 209, 178, .3);
-          transition: .5s;
+          transition: .3s;
             &::before {
               content: "";
               position: absolute;
-              top: -3px;
-              left: -3px;
-              width: 220px;
+              top: 0px;
+              left: 0px;
+              width: 200px;
               border-radius: 10px;
-              height: 74px;
+              height: 55px;
               background: rgba(0, 209, 178, .8);
               animation: identifier 1s forwards;
           }
           @keyframes identifier {
-            0% {
-              width: 200px;
-              height: 55px;
-            }
             100% {
-              width: 224px;
-              height: 80px;
-              top: -15px;
-              left: -15px;
+              width: 220px;
+              height: 75px;
+              top: -12px;
+              left: -12px;
               opacity: 0;
             }
           }
@@ -841,7 +839,7 @@ button {
               border-radius: 10px;
               height: 55px;
               background: rgba(0, 209, 178, 0.5);
-              animation: identifier 0.4s forwards;
+              animation: identifier1 0.4s forwards;
           }
           &::after {
               content: "";
@@ -853,9 +851,9 @@ button {
               border-radius: 10px;
               height: 30px;
               border: 3px solid #00d1b2;
-              animation: identifier1 .5s forwards;
+              animation: identifier2 .5s forwards;
           }
-          @keyframes identifier {
+          @keyframes identifier1 {
             100% {
               width: 220px;
               height: 75px;
@@ -864,10 +862,44 @@ button {
               opacity: 0;
             }
           }
-          @keyframes identifier1 {
+          @keyframes identifier2 {
             100% {
               width: 200px;
               height: 55px;
+            }
+          }
+        }
+      }
+      .col:nth-child(2) {
+        button {
+          position: relative;
+          width: 200px;
+          height: 55px;
+          background-color: inherit;
+          border: 3px solid rgba(0, 209, 178, 1);
+          color: #fff;
+          font-size: 18px;
+          font-weight: bold;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+        button:hover {
+          &::after {
+            content: "OPEN";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%);
+            width: 3px;
+            height: 49px;
+            line-height: 49px;
+            background: rgba(0, 209, 178,1);
+            animation: identifier3 .5s forwards;
+          }
+          @keyframes identifier3 {
+            100% {
+              width: 197px;
+              border-radius: 10px;
             }
           }
         }
